@@ -14,27 +14,22 @@ const AdminComments = () => {
         },
     });
     const [selectedComment, setSelectedComment] = useState(null);
-    const [getComment, setselectComment] = useState(null);
+    const [userComment, setUserSelectedComment] = useState(null);
     const [isLoadingCommnets, setLoading] = useState(false);
     const [isError, setError] = useState("");
     const [comments, setComments] = useState([]);
   
-    const handleDeleteUser = async(selectedComment) => {
-      const toast_id = toast.loading("Please wait...")
-      const data = {
-        id:selectedComment._id,
-      }
-      try {
-      const response = await axiosPrivate.delete(`recipe`,
-      {
+    const handlDeleteComment = async(comment) => {
+        try {
+          const toast_id = toast.loading("Please wait...")
+          const response = await axiosPrivate.delete(`comments/${comment._id}`,
+          {
             headers: { "Content-Type": "application/json" },
-            data: {
-              id: selectedComment._id
-            },
             withCredentials: true,
-       });
-        toast.update(toast_id, 
-          { render: `${selectedComment._id} recipe has been deleted.`,
+          });
+          console.log(response);
+          toast.update(toast_id, 
+          { render: `comment has been deleted.`,
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -42,22 +37,14 @@ const AdminComments = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          type: "error", isLoading: false });     
+          theme: "colored", type: "info", isLoading: false });      
           await refetch();
           setSelectedComment(null);
-      } catch (error) {
-        toast.update(toast_id, 
-          { render: `${error}`,
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored", type: "error", isLoading: false });   
+    
+        } catch (error) {
+          console.log(error);
+        }
       }
-    };
 
     useEffect(() => {
         if(selectedComment != null)
@@ -78,7 +65,10 @@ const AdminComments = () => {
             fetchCommentsUser();
         }
     },[selectedComment])
-  
+    
+    const handleCommentClick = (comment) => {
+        setUserSelectedComment(comment.comment);
+    }
     const handleUserClick = (user) => {
       setSelectedComment(user);
     };
@@ -115,17 +105,19 @@ const AdminComments = () => {
             <div className="bg-white rounded shadow p-4">
               {selectedComment ? 
                 (comments.length > 0 ? 
-                    (
-                        comments.map(comment => (
-                            <div>
-                                <div onClick={() => setselectComment(comment)} className={`cursor-pointer px-4 py-2 border-b border-gray-200 ${getComment && getComment._id === comment._id
-                        ? 'bg-blue-100'
-                        : ''}`}>
+                    ( <article>
+                        {isLoadingCommnets && <p>Loading...</p>}
+                        {!isLoadingCommnets && isError && <p>{isError.message}</p>}
+                        {comments.map(comment => (
+                            <div key={comment._id} onClick={() => handleCommentClick(comment)}>
+                                <div className={`cursor-pointer px-4 py-2 border-b border-gray-200 ${userComment && userComment._id === comment.comment._id
+                        ? 'bg-blue-100': ''}`}>
                                     <p className="text-gray-700">Recipe Name: {comment.recipe[0].recipeName}</p>
                                     <p className="text-gray-700">Comment: {comment.comment.comment}</p>
                                 </div> 
                         </div>
-                        ))
+                        ))}
+                    </article>
                     )
                     : 
                     (   
@@ -141,17 +133,17 @@ const AdminComments = () => {
           <div>
             <h2 className="text-lg font-bold mb-4">Actions</h2>
             <div className="bg-white rounded shadow p-4">
-              {selectedComment ? (
+              {selectedComment && userComment  ? (
                 <div className='flex flex-col w-fit'>
                   <button
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => handleDeleteUser(selectedComment)}
+                    onClick={() => handlDeleteComment(userComment)}
                   >
-                    Delete Recipe
+                    Delete Comment
                   </button>
                 </div>
               ) : (
-                <p>Please select a user to perform actions</p>
+                <p>Please select a user comment to perform actions</p>
               )}
             </div>
           </div>

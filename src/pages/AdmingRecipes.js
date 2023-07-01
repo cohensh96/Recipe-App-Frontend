@@ -118,7 +118,7 @@ const AdmingRecipes = () => {
                 </button>
               </div>
             ) : (
-              <p>Please select a user to perform actions</p>
+              <p>Please select a recipe to perform actions</p>
             )}
           </div>
         </div>
