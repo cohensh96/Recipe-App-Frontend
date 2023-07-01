@@ -81,7 +81,7 @@ const SignUp = ({ setView}) => {
         );
         console.log(JSON.stringify(responseLogin?.data));
         const accessToken = responseLogin?.data?.accessToken;
-        const roles = response?.data?.roles;
+        const roles = responseLogin?.data?.roles;
         const user = data.username;
         const pwd = data.password;
         setAuth({ user, password, roles, accessToken });
