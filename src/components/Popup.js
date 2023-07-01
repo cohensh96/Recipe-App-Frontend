@@ -24,7 +24,7 @@ const Popup = ({setIsLogin}) => {
       <section className="z-50 fixed w-full h-full flex justify-end items-end md:justify-center md:items-center bg-gray-800/60">
       <article
         ref={wrapperRef}
-        className="h-3/4 flex flex-col w-full md:w-3/6 lg:w-1/4 lg:h-3/6 relative bg-gray-100  items-center p-4 rounded-md"
+        className="h-3/4 flex flex-col w-full md:w-3/6 md:h-fit lg:w-1/4 relative bg-gray-100  items-center p-4 rounded-md"
         onClick={undefined}
       >
         <NavLink to="/"  onClick={() => setIsLogin(false)}>

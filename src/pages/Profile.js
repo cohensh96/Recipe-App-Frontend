@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 import axios from '../api/axios';
 import useAxios from '../hooks/useAxios';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
-import { FaStar, FaDoorOpen } from 'react-icons/fa';
+import { FaStar, FaDoorOpen,FaUser  } from 'react-icons/fa';
 import { MdDinnerDining } from 'react-icons/md';
 import { GiCook, GiRead } from 'react-icons/gi';
 import { ToastContainer, toast } from 'react-toastify';
@@ -156,8 +156,7 @@ const Profile = () => {
           <GiCook/>
           <h2>My Profile</h2>
         </article>
-
-        <article className='user-panel mt-10 h-fit p-2 text-xl flex flex-col justify-between bg-orange-100 w-full lg:h-1/8 lg:w-3/4 lg:mx-auto lg:rounded-md'>
+        <article className='user-panel mt-10 h-fit p-2 text-xl flex flex-col justify-between bg-orange-100 w-full lg:h-fit lg:w-3/4 lg:mx-auto lg:rounded-md'>
             {!loadinguser && !erroruser && 
               <div>
                   <h2 className='text-2xl text-center'>
@@ -194,6 +193,16 @@ const Profile = () => {
                   Create Recipe
                 </button>
               </NavLink>
+              {auth && auth?.roles?.find(role => role === 420420) &&
+              <NavLink to={"/admin"}>
+                <button 
+                  type="button" 
+                  className="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-base px-5 py-2.5 text-center inline-flex items-center  mr-2 mb-2"
+                  >
+                  <FaUser className="h-8 w-8"/>
+                  Admin page
+                </button>
+              </NavLink>}
               <NavLink to={"/"} state={{from: location}} replace>
                 <button 
                   type="button" 
@@ -277,144 +286,13 @@ const Profile = () => {
                             Delete
                         </button>
                 </article>
-        
                 <ToastContainer closeOnClick={false} closeButton={false} />
-
-                {/* <section>
-                  <section className='flex ml-auto flex-col p-5'>
-                    <button className='font-bold bg-green-100 p-2 rounded-md  border-2 border-green-500 uppercase whitespace-nowrap'>
-                     <NavLink to={`/recipe/${recipe._id}`} state={{from: location}}>
-                        Read more
-                      </NavLink>
-                    </button>
-                    <button 
-                    className='font-bold mt-2 bg-rose-100 p-2 rounded-md border-2 border-rose-500 uppercase' 
-                    onClick={() => handleDelete(recipe)}>
-                      Delete
-                    </button>
-                  </section>
-                </section> */}
               </article>
             )))
           }
         </article>
       </article>
     </section>
-    // <section className=''>
-    // <div className="flex justify-center items-center md:mt-8 md:mb-4">
-    //   <GiCook className=' h-16 w-16 lg:h-20 lg:w-20 text-orange-500'/>
-    //   <h2 className="mt-9 font-sans font-bold text-lg lg:text-4xl uppercase text-orange-500 ">
-    //     My Profile
-    //   </h2>
-    // </div>
-    // <section className='flex w-full'>
-    //     <section className='leftside-panel m-10 p-5 rounded-md w-1/2'>
-
-    //     <aside className='panel flex flex-col h-fit bg-orange-50 p-3 rounded-lg'>
-    //     {!loadinguser && !erroruser && 
-    //       <h2 className='text-4xl'>
-    //         <span className=' font-bold'>Hello</span> {user.firstname} {user.lastname} !
-    //       </h2>
-    //     }
-    //     <p className='mt-10 text-2xl font-bold'>User Rating: 
-    //     {loadingAvarage && <span>Loading avarage...</span>}
-    //     {!loadingAvarage && !errorAvarage && <span>{avarage.avarage}/5</span>}
-    //     </p>
-        
-    //    <div className="flex flex-col rounded-md mt-2">
-    //      <div  className='h-fit transition-all'>
-    //       <NavLink to="/CreateRecipe" className={"mt-3  w-60 hover:text-orange-100 hover:bg-orange-500 flex rounded-lg py-2 px-3 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none btn bg-orange-500 hidden md:flex font-bold uppercase  text-1xl text-center items-center leading-none"} state={{from: location}}>
-    //       <MdDinnerDining className='h-20 w-20'/>
-    //         Create Recipe</NavLink>
-    //       </div>
-    //      <div className=''> 
-    //       <NavLink to="/" className={"mt-4 w-20 hover:text-orange-100 flex rounded-lg py-2 px-3 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none btn bg-orange-500 hidden md:flex font-bold uppercase  text-1xl text-center items-center leading-none"} state={{from: location}} replace>
-    //         <button onClick={() => handleSignOut()}>
-    //           Logout
-    //         </button>
-    //       </NavLink>
-    //       </div>
-    //       </div>
-    
-    //   </aside>
-    //   <section className='comments mt-10'>
-    //       <h2 className='text-2xl font-bold'>Your last comments:</h2>
-    //       {loading && <p>Loading ..</p>}
-    //       {!loading && error && <p>{error}</p>}
-    //       {!loading && !error && comments !== null &&
-
-    //         comments.length <= 0  ? 
-    //         (<p>No comments posted</p>) :
-    //         (comments.map(element => (
-    //           <NavLink key={element.comment._id} to={`/recipe/${element.comment.recipeId}`} state={{from: location}}>
-    //             <article className=' bg-slate-50 p-5 rounded-md mt-4 relative hover:bg-orange-200'>
-    //               <div className='p-3'>
-    //                 <h2 className='text-1xl underline'>{element.recipe[0].recipeName}</h2>
-    //                 <h3>{element.comment.comment}</h3>
-    //               </div>
-    //               <div className='absolute p-1 bottom-0 right-0'>
-    //                 <p className='inline w-full'>
-    //                   Rating:
-    //                 <ol className='flex'>
-    //                     {
-    //                         [1, 2, 3, 4, 5].map((star, index) => (
-    //                             <li key={index}><FaStar className={element.comment.rating >= star ? 'text-yellow-500' : 'text-gray-300'}/></li>
-    //                         ))
-    //                     }
-    //                 </ol>
-    //                 </p>
-    //               </div>
-    //               <p className=' absolute top-0 right-0'>{(new Date(element.comment.createdAt)).toLocaleDateString()}</p>
-    //             </article>              
-    //           </NavLink>
-    //         )))
-    //       }
-    //     </section>
-    //   </section>
-    //   <article className='w-1/4'>
-    //       <p className='mt-8 text-2xl font-bold'>Your Recipes:</p>
-    //         {loadingRecipe && <p>Loading ..</p>}
-    //         {!loadingRecipe && errorRecipe && <p>{errorRecipe}</p>}
-    //         {!loadingRecipe && !error && 
-    //           state.collection.length <= 0  ? 
-    //           (<p>No recipes posted</p>) :
-             
-    //           (state.collection.filter(recipe => !state.toRemove.includes(recipe._id))
-    //           .map((recipe) => (
-    //             <article key={recipe._id} className='bg-slate-50 p-5 rounded-md mt-4 relative'>
-    //               <section className='flex'>
-    //                 <section className='flex flex-col p-3'>
-    //                   <h2 className='text-1xl underline'><b>Recipe name:</b>{recipe.recipeName}</h2>
-    //                   <div className='h-10 relative overflow-y-hidden'>
-    //                     <h3 className=' h-full'><b>Recipe description:</b>{recipe.recipeDescription}</h3>
-    //                   </div>
-    //                   <p className=' absolute bottom-0 m-2 font-bold'>Catagorys:
-    //                     {(recipe.recipeCategorys).map((category,index) => (
-    //                       <span key={index} className='ml-2 w-fit bg-zinc-200 border border-zinc-500 rounded-md p-1'>{category}</span>
-    //                     ))}
-    //                   </p>
-    //                 </section>
-    //                 <section className='flex ml-auto flex-col p-5'>
-    //                   <button className='font-bold bg-green-100 p-2 rounded-md  border-2 border-green-500 uppercase whitespace-nowrap'>
-    //                     <NavLink to={`/recipe/${recipe._id}`} state={{from: location}}>
-    //                       Read more
-    //                     </NavLink>
-    //                   </button>
-    //                   <button 
-    //                   className='font-bold mt-2 bg-rose-100 p-2 rounded-md border-2 border-rose-500 uppercase' 
-    //                   onClick={() => handleDelete(recipe)}>
-    //                     Delete
-    //                   </button>
-    //                 </section>
-    //               </section>
-    //             </article>
-    //           )))
-    //         }
-    //         <ToastContainer closeOnClick={false} closeButton={false} />
-    //   </article>
-
-    //   </section>
-    // </section>
   )
 }
 

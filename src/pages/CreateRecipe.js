@@ -18,7 +18,7 @@ const CreateRecipe = () => {
   const [recipeCooking, setRecipeCooking] = useState("");
   const [catagory, setCatgory] = useState("");
   const [recipeCategorys, setRecipeCatgory] = useState([]);
-
+  const [errorMsg, setErrorMsg] = useState("");
   const [isShown, setIsShown] = useState(false);
 
   const [ingrident, setIngrdient] = useState();
@@ -55,6 +55,8 @@ const CreateRecipe = () => {
       navegate(`/recipe/${response.data._id}`)
     } catch (error) {
       console.log(error);
+      setErrorMsg(data.message);
+      
     }
   };
   const handleDeleteCatagory = (deleteItem) => {
@@ -323,6 +325,7 @@ const CreateRecipe = () => {
               >
                 Create <FaArrowRight className="ml-1" />
               </button>
+              {errorMsg && <p className="text-red-500 font-bold text-1xl mt-5">{errorMsg}</p>}
             </form>
           </div>
         </div>

@@ -22,8 +22,8 @@ const VideoSection = ({video}) => {
 const OurCommunity = () => {
     const videos = ["cake", "pasta", "meat"];
   return (
-    <section className='md:p-8 lg:mt-9 md:max-w-6xl mx-auto'>
-        <div className='px-6 py-10 overflow-hidden shadow-xl rounded-3xl bg-cool-indigo-600 sm:px-12 sm:py-20 font-display'>
+    <section className='lg:mt-9 md:max-w-6xl mx-auto'>
+    <div className='px-6 py-10 overflow-hidden shadow-xl rounded-3xl bg-cool-indigo-600 font-display'>
             <div className="">
                 <h2 className='text-4xl font-extrabold text-black tracking-tight sm:text-4.5xl font-display'>
                     Our Community

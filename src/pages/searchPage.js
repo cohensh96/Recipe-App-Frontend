@@ -12,12 +12,13 @@ const SearchPage = () => {
     "DiaryFree",
     "Dinner",
     "GlutenFree",
-    "QuickAndEasy",
+    "Quick",
     "Salades",
     "Vegan",
     "Vegetrian",
     "Desserts",
   ];
+  const difficutlyTags=["Easy","Medium","Hard"];
   const location = useLocation();
   const initialSearchTerm = location.state?.searchTerm || "";
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);

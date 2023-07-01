@@ -1,16 +1,18 @@
 import {useNavigate, NavLink} from "react-router-dom";
 import React, { useState } from "react";
 import useAxios from "../hooks/useAxios";
+import logo from '../Logo.png'
 import axios from "../api/axios";
 import useImage from "../hooks/useImage";
 import OurCommunity from "../components/OurCommunity";
+import {LuChefHat} from 'react-icons/lu'
 const HomePage = () => {
   const getImage = useImage;
   const categories = [
     {
-      name:"Diary Free",
+      name:"Breakfast",
       image:"dairyFree.jpeg",
-      catagory:"diaryFree",
+      catagory:"breakfast",
     },
     {
       name:"Dinner",
@@ -23,9 +25,9 @@ const HomePage = () => {
       catagory:"glutenFree",
     },
     {
-      name:"Quick and Easy",
+      name:"Quick",
       image:"quick_and_easy.jpeg",
-      catagory:"quickAndEasy",
+      catagory:"quick",
     },
     {
       name:"Salades",
@@ -70,6 +72,17 @@ const HomePage = () => {
  
   return (
     <section className="homepage_container lg:mb-6">
+      <div className="grid font-display font-bold place-content-center mb-8 lg:hidden">
+        <div className="parent mt-14 flex justify-center items-center relative">
+          <h1 className="text-6xl text-orange-500">
+              R<span className="relative">
+                F
+                <LuChefHat className="text-4xl -top-4 left-0 absolute text-orange-500"/>
+              </span>N                         
+            </h1>
+          <img src={logo} className="h-24 top-0" alt="page logo" />
+        </div>
+      </div>
       <h6 className=" mb-4 md:pt-9 pt-10 lg:mt-9 text-4xl font-semibold leading-none tracking-tight text-center text-gray-900 md:text-5xl lg:text-5xl ">
         <span className="underline underline-offset-3 decoration-8 decoration-orange-500 dark:decoration-orange-500">
           Top
@@ -141,12 +154,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      <div className=" bg-rose-50 h-80 md:max-w-6xl mx-auto flex flex-col items-center justify-center">
-        <h2 className="text-4xl">Search A Recipe</h2>
+      <div className=" bg-rose-50 p-3 rounded-md h-80 md:max-w-6xl mx-auto flex flex-col items-center justify-evenly">
+        <h2 className="text-4xl font-bold">Search A Recipe</h2>
         <form
           method="GET"
           action=""
-          className="search-form mt-10 w-full flex-1"
+          className="search-form mt-10 w-full"
           role="search"
           onSubmit={handleSearchSubmit}
         >
@@ -208,22 +221,13 @@ btn bg-orange-500 hidden md:flex font-bold uppercase  text-1xl text-center items
 
       <section className=" lg:mt-9 md:max-w-6xl mx-auto">
         <div className="md:grid grid-cols-12 gap-x-2">
-          <img
-            className="block md:hidden mx-auto"
-            alt="In our kitchen"
-            loading="lazy"
-            width="960"
-            height="640"
-            src=" 960w"
-            sizes="100vw"
-            data-pin-nopin="true"
-          ></img>
           <div className="col-span-4 p-8 md:px-6 md:py-8 lg:py-3 lg:px-8 bg-gray-100 text-center">
-            <h3 className="sm:mt-6 md:mt-0 lg:mt-6 mb-6 lg:mb-12 flex flex-col justify-center text-black text-base font-arvo uppercase tracking-widest">
+            <h3 className="sm:mt-6 md:mt-0 lg:mt-6 mb-6 lg:mb-12 flex flex-col justify-center items-center text-black text-base font-arvo uppercase tracking-widest">
+              <img src={logo} className="block h-32 w-32 md:hidden" alt="" />
               <span className="font-bold mt-9">Hi! We're RFN.</span>
               <span className="home-you font-bold">Nice to Meet You!</span>
             </h3>
-            <p className=" font-bold uppercase lg:mb-3 lg:px-8 leading-loose md:leading-snug lg:leading-loose">
+            <p className=" lg:mb-3 lg:px-8 leading-loose md:leading-snug lg:leading-loose">
               Recipe For Everyone is here to help you cook delicious meals with
               less stress and more joy. We offer recipes and cooking advice for
               home cooks, by home cooks.
