@@ -40,28 +40,23 @@ const invalidLabelClass =
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
-      console.log(accessToken);
-      setAuth({ user, password, accessToken });
+      const roles = response?.data?.roles;
+      setAuth({ user, password, roles, accessToken });
       setIsLogin(false);
       setUser("");
       setPassword("");
     } catch (error) {
       const { status, data } = error.response;
+        setUsernameBorderColor(false)
+        setPasswordBorderColor(false)
         if( data.message==="Missing few fields in user register.")
        { 
-        setError("Missing few fields.")
-        setUsernameBorderColor(false)
-        setPasswordBorderColor(false)
+          setError("Missing few fields.")
        }else if(data.message==="User not found."){
-        setError("Username not found.")
-        setUsernameBorderColor(false)
-        setPasswordBorderColor(false)
+          setError("Username not found.")
        }else if(data.message==="username or password dosent match."){
-        setError("Wrong username or passsword.")
-        setUsernameBorderColor(false)
-        setPasswordBorderColor(false)
+          setError("Wrong username or passsword.")
        }else {
         console.log(error.message); 
         setError("An error occurred."); 
@@ -69,7 +64,6 @@ const invalidLabelClass =
       }
     }
   };
-
   const togglePersist = () => {
     setPersist(prev => !prev);
   }

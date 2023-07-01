@@ -1,5 +1,5 @@
 
-const BASE_URL = 'http://localhost:3500'
+const BASE_URL = "https://recipes-for-everyone-backend.onrender.com"
 const useImage = (ImageString) => {
     if(ImageString === null || ImageString === undefined)
     return;

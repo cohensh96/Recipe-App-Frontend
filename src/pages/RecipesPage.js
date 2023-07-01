@@ -2,22 +2,21 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {FaClock} from 'react-icons/fa';
 import useImage from '../hooks/useImage';
+import useAxios from '../hooks/useAxios';
+import axios from "../api/axios";
+
 const RecipesPage = () => {
   const getImage = useImage;
-  const [recipes, setRecipes] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
-  useEffect(() => {
-    const fetchData = async () => {
-      //get request
-      const response = await fetch("http://localhost:3500/recipe");
-      const data = await response.json();
-      console.log(data);
-      setIsLoading(false);
-      setRecipes(data);
-    };
-    fetchData();
-  }, []);
+
+  const [recipes,error,isLoading] = useAxios({
+    axiosInstance: axios,
+    method:"GET",
+    url: `recipe`,
+    requestConfig: {
+      'Content-Language': "en-US"
+    }
+  })
   return (
     <div className="sorted-recipes-layout allRecipes">
       <div className="bg-orange-500">
@@ -46,49 +45,10 @@ const RecipesPage = () => {
 
         <div className="container mx-auto grid md:grid-cols-2 pt-4 pb-12">
           {isLoading && <p>Loading..</p>}
-          {recipes &&
-            !isLoading &&
+          {!isLoading && error && <p>{error}</p>}
+          {recipes && !error &&
+            !isLoading && 
               recipes.map((recipe) => (
-          //     <div className="md:h-full mb-4 p-6 flex flex-wrap w-full bg-white rounded overflow-hidden shadow-lg hover:grow hover:shadow-lg  hover:ring-2 hover:ring-orange-500 hover:ring-opacity-50" key={recipe._id}>
-          //         <NavLink to={`/recipe/${recipe._id}`} state={{id:recipe._id}} className="flex md:flex-row flex-col">
-          //         <div className="mt-4 w-full hover:grow hover:shadow-lg md:w-1/3 rounded-t">
-          //         <img
-          //           className="hover:grow hover:shadow-lg w-400 h-500 rounded"
-          //           src= {`http://localhost:3500/${(recipe.Image).replace('uploads/', '')}`}
-          //           alt="Picutre of Recipe"
-          //         ></img>
-          //         </div>
-          //         <div className="w-full md:w-2/3 flex flex-col flex-grow flex-shrink">
-
-          //         <div className=" flex justify-end  w-20 top-0 right-0 mt-4 ml-5 bg-orange-500 text-black rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase  flex justify-center items-center">
-          //   <span className=" flex items-center font-bold text-bkack" >{recipe.recipeDifficulty}</span>
-          // </div>
-
-
-          //         <p className=" font-bold text-orange-400  md:text-2xl pt-6 px-6">{recipe.recipeName}</p>
-          //         <p className="pt-1 font-bold text-gray-900 pt-2 px-6">Author:{recipe.author}</p>
-          //         <p className="font-bold text-gray-600 text-xs md:text-sm pt-3 px-6">{recipe.recipeDescription.substring(0, 100)} 
-          //         <u> Read more...</u></p>
-
-          //         <div className="flex justify-end mt-4 mb-4 text-gray-500">
-          //     <div className="flex items-center">
-          //       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          //         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          //       </svg>
-          //       <span className="ml-1 lg:text-xl">{recipe.recipeTime}</span>
-          //     </div>
-          //     <div className="flex items-center">
-          //       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          //         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-          //         <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
-          //       </svg>
-          //       <span className="ml-1 lg:text-xl">{recipe.recipeIngredients.length}</span>
-          //     </div>
-          //   </div>  
-          //     </div>
-          //     </NavLink>
-          //     </div>
-          //`background-image: url(${getImage(recipe.Image)}); background-position: center center; background-blend-mode: multiply; background-size: cover;`
           <div
           class="transition-all duration-150 flex w-full px-4 py-6 h-full"
         >

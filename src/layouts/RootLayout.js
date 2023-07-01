@@ -87,7 +87,7 @@ export const RootLayoutDesktop = ({isLogin, setIsLogin}) => {
                 <li className="p-4 font-bold uppercase hover:text-orange-500 duration-200 cursor-pointer">
                   <NavLink to="AboutUs">About</NavLink>
                 </li>
-                <a href="http://localhost:3000"><img src={logo} alt="logo" width={100} height={100}/></a>
+                <NavLink to="/"><img src={logo} alt="logo" width={100} height={100}/></NavLink>
                 <li className="p-4 font-bold uppercase hover:text-orange-500 duration-200 cursor-pointer">
                   <NavLink to="recipe">Recipes</NavLink>
                 </li>

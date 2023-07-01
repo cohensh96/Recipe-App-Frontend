@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useImage from '../hooks/useImage';
+import useAxios from '../hooks/useAxios';
+import axios from "../api/axios";
+
 import { NavLink, useLocation } from "react-router-dom";
 const SearchPage = () => {
+  const getImage = useImage;
   const tags = [
     "Hard",
     "Medium",
@@ -22,23 +26,17 @@ const SearchPage = () => {
   const location = useLocation();
   const initialSearchTerm = location.state?.searchTerm || "";
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-  const [recipes, setRecipes] = useState([]);
+
   const [selectedTags, setSelectedTags] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        //get request
-        const response = await fetch("http://localhost:3500/recipe");
-        const data = await response.json();
-        console.log(data);
-        setRecipes(data);
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      }
-    };
-    fetchData();
-  }, []);
+  const [recipes,error,isLoading] = useAxios({
+    axiosInstance: axios,
+    method:"GET",
+    url: `recipe`,
+    requestConfig: {
+      'Content-Language': "en-US"
+    }
+  })
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -181,7 +179,11 @@ const SearchPage = () => {
           </header>
 
           <div className="text-white mb-8 mt-8">
-            {filteredRecipes.length > 0 ? (
+          {isLoading && <p>Loading..</p>}
+          {!isLoading && error && <p>{error}</p>}
+          {!error &&
+            !isLoading && 
+            filteredRecipes.length > 0 ? (
               filteredRecipes.map((recipe) => (
                 <div
                   className="md:h-full mb-4 p-6 flex flex-wrap w-full bg-white rounded overflow-hidden shadow-lg hover:grow hover:shadow-lg  hover:ring-2 hover:ring-orange-500 hover:ring-opacity-50"
@@ -195,10 +197,7 @@ const SearchPage = () => {
                     <div className="mt-4 w-full hover:grow hover:shadow-lg md:w-1/3 rounded-t">
                       <img
                         className="hover:grow hover:shadow-lg w-400 h-500 rounded"
-                        src={`http://localhost:3500/${recipe.Image.replace(
-                          "uploads/",
-                          ""
-                        )}`}
+                        src={getImage(recipe.Image)}
                         alt="Picutre of Recipe"
                       ></img>
                     </div>

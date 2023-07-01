@@ -1,17 +1,16 @@
 import { useEffect, useRef, useReducer, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import axios from '../api/axios';
 import useAxios from '../hooks/useAxios';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { FaStar, FaDoorOpen,FaUser  } from 'react-icons/fa';
 import { MdDinnerDining } from 'react-icons/md';
-import { GiCook, GiRead } from 'react-icons/gi';
+import { GiCook } from 'react-icons/gi';
 import { ToastContainer, toast } from 'react-toastify';
 import {FaUserEdit } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import useLogout from '../hooks/useLogout';
-import UpdateProfile from "./UpdateProfile.js"
+
 function reducer(state, action) {
   switch (action.type) {
     case "QUEUE_FOR_REMOVAL":
@@ -150,7 +149,7 @@ const Profile = () => {
   }
   return (
     <section className='font-display'>
-      <article className='flex flex-col items-center mx-auto pt-10 lg:grid lg:grid-cols-2 lg:gap-5'>
+      <article className='flex flex-col  mx-auto pt-10 lg:grid lg:place-content-start lg:grid-cols-2 lg:gap-5'>
         {/* Profile + Icon */}
         <article className='flex text-5xl text-orange-500 lg:col-span-2 lg:place-content-center lg:mb-2'>
           <GiCook/>

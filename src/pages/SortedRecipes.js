@@ -1,19 +1,20 @@
 import { NavLink, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import axios from "../api/axios";
+import useImage from '../hooks/useImage';
 
 const SortedRecipes = () => {
   const { sortedByCategory } = useParams()
   console.log(sortedByCategory)
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const getImage = useImage;
     useEffect(() => {
       const fetchData = async () => {
         //get request
-        const response = await fetch("http://localhost:3500/recipe");
-        const data = await response.json();
-        console.log(data);
+        const response = await axios.get('recipe');
+        const data =  response.data;
+        
         const sortedRecipes = data.filter((recipe) => { 
             const foundCategory=(recipe.recipeCategorys).find((category)=> category.toLowerCase() === sortedByCategory.toLowerCase())
             if(foundCategory)
@@ -89,7 +90,7 @@ const SortedRecipes = () => {
                   <div className="mt-4 w-full hover:grow hover:shadow-lg md:w-1/3 rounded-t">
                   <img
                     className="hover:grow hover:shadow-lg w-400 h-500 rounded"
-                    src= {`http://localhost:3500/${(recipe.Image).replace('uploads/', '')}`}
+                    src= {getImage(recipe.Image)}
                     alt="Picutre of Recipe"
                   ></img>
                   

@@ -8,7 +8,6 @@ import {
 import './App.css';
 
 //Layouts
-import SortedRecipesLayout from './layouts/SortedRecipesLayout'
 import RootLayout from './layouts/RootLayout'
 
 // Auth
@@ -27,8 +26,6 @@ import PersistLogin from './components/PersistLogin';
 import SearchPage from './pages/searchPage';
 import StartHerePage from './pages/StartHerePage';
 import UpdateProfile from './pages/UpdateProfile.js';
-
-
 import Unauthorized from './components/Unauthorized';
 import AdminLayout from './layouts/AdminLayout';
 import Adminpage from './pages/Adminpage';
@@ -42,34 +39,8 @@ const ROLES_LIST = {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-   
-
+  
 <Route element={<PersistLogin/>}>
-<Route path="/" element={<RootLayout />}>
-  <Route index element={<HomePage />} />
-  <Route path="category">
-    <Route element={<SortedRecipes />} 
-    path=":sortedByCategory" 
-  />
-  </Route>
-  <Route path='recipe'>
-    <Route index element={<RecipesPage />} />
-    <Route path=':id' element={<RecipePage/>}/>
-    <Route path='edit'>
-      <Route path=':id' element={<EditRecipe/>}/>
-    </Route>
-  </Route>
-    <Route element ={<RequireAuth/>}>
-      <Route path="CreateRecipe" element={<CreateRecipe />} />
-      <Route path='updateProfile'>
-             <Route path=':id' element={<UpdateProfile/>}/>
-          </Route>
-    </Route>
-
-  <Route path='StartHere' element={<StartHerePage/>}/>
-  <Route path='AboutUs' element={<AboutUsPage/>}/>
-  <Route path='SearchRecipe' element={<SearchPage/>}/>
-  <Route path="*" element={<ErrorPage />} />
       <Route path="/" element={<RootLayout />}>
         <Route index element={<HomePage />} />
         <Route path="category">
@@ -96,6 +67,10 @@ const router = createBrowserRouter(
       <Route element ={<RequireAuth allowedRoles={[ROLES_LIST.User]}/>}>
         <Route path="CreateRecipe" element={<CreateRecipe />} />
         <Route path="profile" element={<Profile/>}/>
+        <Route path='updateProfile'>
+             <Route path=':id' element={<UpdateProfile/>}/>
+       </Route>
+       
         <Route element ={<RequireAuth allowedRoles={[ROLES_LIST.Admin]}/>}>
             <Route path="admin" element={<AdminLayout/>}>
               <Route path='user'>
@@ -115,7 +90,7 @@ const router = createBrowserRouter(
       <Route path="*" element={<ErrorPage />} />
   </Route>
 </Route>
-</Route>
+
   )
 )
 

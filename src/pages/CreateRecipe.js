@@ -1,10 +1,9 @@
-import { useState, useReducer } from "react";
+import { useState } from "react";
 import { FaArrowRight, FaPlusCircle, FaTrash } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import RecipeInstructions from "./RecipeInstructions";
-import DragDropFile from "../components/DragDropFile";
-import {redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +19,6 @@ const CreateRecipe = () => {
   const [recipeCategorys, setRecipeCatgory] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [isShown, setIsShown] = useState(false);
-
   const [ingrident, setIngrdient] = useState();
   const [recipeIngredients, setRecipeIngridenets] = useState([]);
   

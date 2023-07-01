@@ -1,5 +1,3 @@
-import useAxios from '../hooks/useAxios';
-import axios from '../api/axios'
 import { useParams, useNavigate } from 'react-router-dom';
 import useImage from '../hooks/useImage';
 import { useState, useEffect } from 'react';
