@@ -81,10 +81,10 @@ const SignUp = ({ setView}) => {
         );
         console.log(JSON.stringify(responseLogin?.data));
         const accessToken = responseLogin?.data?.accessToken;
-        console.log(accessToken);
+        const roles = response?.data?.roles;
         const user = data.username;
         const pwd = data.password;
-        setAuth({ user, pwd, accessToken });
+        setAuth({ user, password, roles, accessToken });
         setIsLogin(false);
         navigate('/profile');
       }

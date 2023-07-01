@@ -86,7 +86,7 @@ const SortedRecipes = () => {
               !isLoading &&
               recipes.map((recipe) => (
                 <div className="md:h-full mb-4 p-6 flex flex-wrap w-full bg-white rounded overflow-hidden shadow-lg hover:grow hover:shadow-lg  hover:ring-2 hover:ring-orange-500 hover:ring-opacity-50" key={recipe._id}>
-                  <NavLink to={`${recipe._id}`} state={{id:recipe._id}} className="flex md:flex-row flex-col">
+                  <NavLink to={`/recipe/${recipe._id}`} state={{id:recipe._id}} className="flex md:flex-row flex-col">
                   <div className="mt-4 w-full hover:grow hover:shadow-lg md:w-1/3 rounded-t">
                   <img
                     className="hover:grow hover:shadow-lg w-400 h-500 rounded"
