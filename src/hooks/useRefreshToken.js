@@ -27,7 +27,7 @@ const useRefreshToken = () => {
             }));
             return response.data.accessToken;
         } catch (err) {
-            throw new Error("Failed to refresh token. Please login again.");
+            throw new Error("Please login in order to continue.");
         }
     };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import { FaStar, FaComment } from 'react-icons/fa';
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
  * @param {Function} setIsCommented - Callback function to update the state of whether a comment is posted.
  */
 const CommentSection = ({ setIsCommented }) => {
+  const toastId = useRef(null);
   const { id } = useParams();
   const axiosPrivate = useAxiosPrivate();
   const [rating, setRating] = useState(0);
@@ -54,7 +55,7 @@ const CommentSection = ({ setIsCommented }) => {
       setComment("");
       setRating(0);
 
-      toast.success('You have posted a new comment', {
+      toastId.current = toast.success('You have posted a new comment', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -65,16 +66,19 @@ const CommentSection = ({ setIsCommented }) => {
         theme: "light",
       });
     } catch (error) {
-      toast.error(`${(error?.response?.data?.message) ? error.response.data.message : error.message}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      if(! toast.isActive(toastId.current))
+      {
+        toastId.current = toast.error(`${(error?.response?.data?.message) ? error.response.data.message : error.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
       return;
     }
   };
