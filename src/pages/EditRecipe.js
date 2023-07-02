@@ -179,7 +179,7 @@ const EditRecipe = () => {
           </div>
           <section className='px-4 py-3'>
           <div className="w-full flex items-center">
-          <h3 className=" font-bold">Recipe Callories:</h3>
+          <h3 className=" font-bold">Recipe Callories per serving:</h3>
             <input
               type="text"
               name="recipeCallories"

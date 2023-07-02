@@ -1,4 +1,4 @@
-const BASE_URL = "https://recipe-app-api-khxh.onrender.com/";
+const BASE_URL = "https://recipes-for-everyone-backend.onrender.com/";
 
 /**
  * Custom hook for converting an image string to a full URL.
