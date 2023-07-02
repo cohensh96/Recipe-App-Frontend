@@ -44,6 +44,12 @@ const PersistLogin = () => {
           },
           icon: "🟢",
         },
+        error: {
+            render() {
+                return `Welcome to the Website`;
+            },
+            icon: false,
+        }
       });
     } else {
       setIsLoading(false);
