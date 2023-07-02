@@ -199,7 +199,7 @@ const CreateRecipe = () => {
                     htmlFor="recipecallories"
                     className="font-bold tracking-tight text-gray-900"
                   >
-                    Recipe Callories per serving
+                    Recipe Callories
                   </label>
                   <input
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-orange-500 outline-none "
