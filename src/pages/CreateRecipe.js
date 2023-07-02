@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaArrowRight, FaPlusCircle, FaTrash } from "react-icons/fa";
-import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import RecipeInstructions from "./RecipeInstructions";
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const CreateRecipe = () => {
   const navegate = useNavigate ();
   const axiosPrivate = useAxiosPrivate();
-  const { auth } = useAuth();
   const [recipeName, setRecipeName] = useState("");
   const [recipeDesc, setRecipeDesc] = useState("");
   const [recipeCallories, setRecipeCalloires] = useState("");
@@ -165,7 +163,7 @@ const CreateRecipe = () => {
                   Recipe Description
                 </label>
                 <textarea
-                  className="rounded-full w-full p-3 text-sm border border-gray-200 rounded-lg outline-none focus:border-orange-500"
+                  className="w-full p-3 text-sm border border-gray-200 rounded-lg outline-none focus:border-orange-500"
                   name="recipedescription"
                   id="recipedescription"
                   rows="8"

@@ -1,12 +1,7 @@
 import React from 'react'
-import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 
-const isActive = () => {
-
-}
 const AdminLayout = () => {
-   const location = useLocation();
-   //'relative block border-e border-s border-t border-gray-200 bg-white p-4 text-sm font-medium'
   return (
     <section>
     <nav aria-label="Tabs">
@@ -17,7 +12,7 @@ const AdminLayout = () => {
             isActive ? "relative block border-e border-s border-t border-gray-200 bg-white p-4 text-sm font-medium" : 
             "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"}
             >
-                {({ isActive, isPending }) => (
+                {({ isActive }) => (
                     <span className={isActive ? "absolute inset-x-0 -bottom-px h-px w-full bg-white" : ""}></span>
                 )}
                 Users Panel
@@ -29,7 +24,7 @@ const AdminLayout = () => {
             isPending ? "pending" : 
             isActive ? "relative block border-e border-s border-t border-gray-200 bg-white p-4 text-sm font-medium" : 
             "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"} match="true">
-                 {({ isActive, isPending }) => (
+                 {({ isActive }) => (
                     <span className={isActive ? "absolute inset-x-0 -bottom-px h-px w-full bg-white" : ""}></span>
                 )}
                 Recipes Panel
@@ -41,7 +36,7 @@ const AdminLayout = () => {
             isPending ? "pending" : 
             isActive ? "relative block border-e border-s border-t border-gray-200 bg-white p-4 text-sm font-medium" : 
             "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"} match="true">
-              {({ isActive, isPending }) => (
+              {({ isActive }) => (
                     <span className={isActive ? "absolute inset-x-0 -bottom-px h-px w-full bg-white" : ""}></span>
                 )}
                 Comments Panel

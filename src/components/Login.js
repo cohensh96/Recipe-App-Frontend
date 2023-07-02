@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 import axios from "../api/axios";
@@ -7,9 +6,6 @@ const LOGIN_URL = "/login";
 const Login = ({ setView, setIsLogin }) => {
   const { setAuth, persist, setPersist } = useAuth();
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -44,7 +40,7 @@ const invalidLabelClass =
       setUser("");
       setPassword("");
     } catch (error) {
-      const { status, data } = error.response;
+      const { data } = error.response;
         setUsernameBorderColor(false)
         setPasswordBorderColor(false)
         if( data.message==="Missing few fields in user register.")

@@ -38,14 +38,14 @@ const AboutUsPage = () => {
             </p>
           </div>
           <div className="w-full sm:w-1/2 p-6">
-            <img src="/images/cook2.png" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
+            <img src="/images/cook2.png" alt="cooking chef"  className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
             </img>
           </div>
         </div>
 
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <img src="/images/cook.png" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
+            <img src="/images/cook.png"  alt="cooking chef" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
             </img>
           </div>
           <div className="w-full sm:w-1/2 p-6 mt-6">
@@ -69,7 +69,7 @@ const AboutUsPage = () => {
         </div>
       </div>
 
-    <div className="container max-w-5xl mx-auto m-8 mx-auto flex flex-wrap pt-4 pb-12">
+    <div className="container max-w-5xl mx-auto m-8 flex flex-wrap pt-4 pb-12">
         <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
           MEET THE TEAM
         </h2>
@@ -89,7 +89,7 @@ const AboutUsPage = () => {
           </div>
           <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
             <div className="flex items-center justify-start">
-              <img src="/images/shir.png" alt="shir picture" className="mx-auto lg:mx-0 hover:underline gradient font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <img src="/images/shir.png" alt="shir" className="mx-auto lg:mx-0 hover:underline gradient font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
               </img>
             </div>
           </div>
@@ -106,7 +106,7 @@ const AboutUsPage = () => {
           </div>
           <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
             <div className="flex items-center justify-center">
-              <img src="/images/eldad.jpg" alt="eldad picture" className="mx-auto lg:mx-0 hover:underline gradient font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <img src="/images/eldad.jpg" alt="eldad" className="mx-auto lg:mx-0 hover:underline gradient font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
               </img>
             </div>
            </div>
@@ -123,7 +123,7 @@ const AboutUsPage = () => {
           </div>
           <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
             <div className="flex items-center justify-center">
-              <img src="/images/bakers.jpg" alt="bakers picture" className=" mx-auto lg:mx-0 hover:underline gradient font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <img src="/images/bakers.jpg" alt="bakers" className=" mx-auto lg:mx-0 hover:underline gradient font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
               </img>
             </div>
            </div>

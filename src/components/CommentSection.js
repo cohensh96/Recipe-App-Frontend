@@ -29,6 +29,7 @@ const CommentSection = ({setIsCommented}) => {
     }
     try 
     {
+        // eslint-disable-next-line
         const response = await axiosPrivate.post(`/comments/${id}`, JSON.stringify(data), {
             headers: {'Content-Type':'application/json'},
             withCredentials: true

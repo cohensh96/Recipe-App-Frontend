@@ -25,6 +25,7 @@ const SortedRecipes = () => {
         setRecipes(sortedRecipes);
       };
       fetchData();
+      // eslint-disable-next-line
     }, []);
 
     return (

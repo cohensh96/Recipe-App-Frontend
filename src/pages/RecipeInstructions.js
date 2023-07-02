@@ -15,7 +15,7 @@ const RecipeInstructions = ({ isShown }) => {
 </ul>
 
 <p>Could you make one of these dishes?  These are just SOME possible ideas!</p>
-<img src="/images/CreateRecipe/step1.png" className=" mt-4" ></img>
+<img src="/images/CreateRecipe/step1.png" alt="steps" className=" mt-4" ></img>
 </div>
 
 
@@ -31,7 +31,7 @@ const RecipeInstructions = ({ isShown }) => {
 
 <h4 className="text-1xl mt-6 text-left font-bold tracking-tight text-gray-900">Making a Salad</h4>
 <p>If I want to make a salad, I will organize my ingredients like this:</p>
-<img src="/images/CreateRecipe/step2.png"  className=" mt-4"></img>
+<img src="/images/CreateRecipe/step2.png" alt="steps" className=" mt-4"></img>
 </div>
 
 
@@ -39,7 +39,7 @@ const RecipeInstructions = ({ isShown }) => {
 <h3 className=" mb-4 text-2xl mt-6 text-left font-bold tracking-tight text-gray-900"
 >Step 3: How do you want your ingredients cooked?</h3>
 <p>Now that you’ve chosen your ingredients, we have to decide how to cook them. There are many different styles of cooking to try.</p>
-<img src="/images/CreateRecipe/step3.png"  className=" mt-4"></img>
+<img src="/images/CreateRecipe/step3.png" alt="steps" className=" mt-4"></img>
 </div>
 
 <div id="step4">

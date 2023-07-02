@@ -1,4 +1,4 @@
-import { useEffect, useRef, useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useAxios from '../hooks/useAxios';
@@ -101,6 +101,7 @@ const Profile = () => {
     }
     fetchRecipes();
     fetchComments();
+    // eslint-disable-next-line
   },[])
 
   const handleDelete = async(recipe) => {
@@ -110,7 +111,7 @@ const Profile = () => {
         id,
         type: "QUEUE_FOR_REMOVAL"
       });
-      const toast_id = toast.loading("Please wait...")
+      const toast_id = toast.loading("Pending request ...")
       
       const response = await axiosPrivate.delete(`recipe`,
       {

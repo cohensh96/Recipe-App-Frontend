@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import useAuth from '../hooks/useAuth';
 import Popup from '../components/Popup';
 
-export const RootMobileLayout = ({isLogin, setIsLogin}) => {
+export const RootMobileLayout = ({ setIsLogin}) => {
   const [isOpen,setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
   const closeButton = useRef(null);
@@ -65,8 +65,7 @@ export const RootMobileLayout = ({isLogin, setIsLogin}) => {
   )
 }
 
-export const RootLayoutDesktop = ({isLogin, setIsLogin}) => {
-  const {auth} = useAuth();
+export const RootLayoutDesktop = ({setIsLogin}) => {
   return (
     <div className="hidden lg:block">
         <nav className='p-5 flex justify-evenly items-center' role="navigation" id="global-navigation" >
@@ -102,7 +101,6 @@ export default function RootLayout({setLogin}) {
   const headerStyle = "header sticky top-0 bg-gradient-to-b from-zinc-200 from-60% backdrop-blur lg:px-8 lg:py-02 z-40"
   const [scrollPostion, setScrollPostion] = useState(0);
   const [isLogin, setIsLogin] = useState(setLogin);
-  const [view, setView] = useState(isLogin);
   const {auth} = useAuth();
 
   const handleScroll = () => {
@@ -118,11 +116,11 @@ export default function RootLayout({setLogin}) {
   }, [])
   return (
     <div className="root-layout">
-    {isLogin && !auth.accessToken && <Popup setIsLogin={setIsLogin} setView={setView}/>}
+    {isLogin && !auth.accessToken && <Popup setIsLogin={setIsLogin} />}
     <header className={scrollPostion > 100 ? headerStyle + " shadow-lg" :headerStyle}>
         
-        <RootMobileLayout isLogin={isLogin} setView={setView} setIsLogin={setIsLogin}/>
-        <RootLayoutDesktop isLogin={isLogin} setView={setView} setIsLogin={setIsLogin}/>
+        <RootMobileLayout isLogin={isLogin} setIsLogin={setIsLogin}/>
+        <RootLayoutDesktop isLogin={isLogin} setIsLogin={setIsLogin}/>
     </header>
       <main>
         <Outlet />

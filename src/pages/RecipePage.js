@@ -52,6 +52,7 @@ const RecipePage = () => {
   const handleSaveChanges = async (comment) => {
     try {
       const toast_id = toast.loading("Please wait...");
+      // eslint-disable-next-line
       const response = await axiosPrivate.put(`comments/${comment._id}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -85,6 +86,7 @@ const RecipePage = () => {
   const handlDeleteComment = async (comment) => {
     try {
       const toast_id = toast.loading("Please wait...");
+      // eslint-disable-next-line
       const response = await axiosPrivate.delete(`comments/${comment._id}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -115,6 +117,7 @@ const RecipePage = () => {
     return () => {
       setIsCommented(false);
     };
+    // eslint-disable-next-line
   }, [isCommented]);
 
   return (

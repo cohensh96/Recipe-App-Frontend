@@ -35,7 +35,7 @@ const PersistLogin = () => {
                 icon: false,
               },
               success: {
-                render({}){
+                render(){
                   return `${auth.accessToken ? "Information updated" : "Welcome to the Website"}`
                 },
                 // other options
@@ -45,6 +45,7 @@ const PersistLogin = () => {
         : 
             setIsLoading(false)
         return () => isMounted = false;
+        // eslint-disable-next-line
     },[])
 
     return (

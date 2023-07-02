@@ -6,6 +6,7 @@ const RatingSection = ({comments}) => {
     const [avarage, setAvarage] = useState(0)
     useEffect(() => {
         handleAvarage();
+        // eslint-disable-next-line
     }, [comments]);
     const handleAvarage = () => {
         if(comments.length <= 0)

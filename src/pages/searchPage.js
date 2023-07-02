@@ -22,7 +22,6 @@ const SearchPage = () => {
     "Vegetrian",
     "Desserts",
   ];
-  const difficutlyTags=["Easy","Medium","Hard"];
   const location = useLocation();
   const initialSearchTerm = location.state?.searchTerm || "";
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
@@ -96,7 +95,7 @@ const SearchPage = () => {
       </div>
       <header className="max-w-xl md:mx-auto text-center">
         <div className="flex justify-center items-center space-x-2 mb-4 mt-4">
-          <img className="mb-6" src="../images/recipe-icon.png"></img>
+          <img className="mb-6" alt="recipe icon" src="../images/recipe-icon.png"></img>
           <h2 className="mb-6 font-sans font-bold tracking-widest text-2xl uppercase text-orange-500 m-0">
             Search Recipes
           </h2>
@@ -173,7 +172,7 @@ const SearchPage = () => {
 
         <div>
           <header className="border-b border-gray-400 pb-2 mb-3 mt-5">
-            <h2 className=" text-2xl text-orange-500  text-black tracking-widest  font-sans font-bold  uppercase">
+            <h2 className=" text-2xl text-orange-500  tracking-widest  font-sans font-bold  uppercase">
               Search Results
             </h2>
           </header>
@@ -202,7 +201,7 @@ const SearchPage = () => {
                       ></img>
                     </div>
                     <div className="w-full md:w-2/3 flex flex-col flex-grow flex-shrink">
-                      <div className=" flex justify-end  w-20 top-0 right-0 mt-4 ml-5 bg-orange-500 text-black rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase  flex justify-center items-center">
+                      <div className="flex justify-end  w-20 top-0 right-0 mt-4 ml-5 bg-orange-500 text-black rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase  flex justify-center items-center">
                         <span className=" flex items-center font-bold text-bkack">
                           {recipe.recipeDifficulty}
                         </span>
@@ -211,7 +210,7 @@ const SearchPage = () => {
                       <p className=" font-bold text-orange-400  md:text-2xl pt-6 px-6">
                         {recipe.recipeName}
                       </p>
-                      <p className="pt-1 font-bold text-gray-900 pt-2 px-6">
+                      <p className="pt-1 font-bold text-gray-900 px-6">
                         Author:{recipe.author}
                       </p>
                       <p className="font-bold text-gray-600 text-xs md:text-sm pt-3 px-6">

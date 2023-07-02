@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {FaClock} from 'react-icons/fa';
 import useImage from '../hooks/useImage';
 import useAxios from '../hooks/useAxios';
@@ -6,7 +6,6 @@ import axios from "../api/axios";
 
 const RecipesPage = () => {
   const getImage = useImage;
-  const location = useLocation();
 
   const [recipes,error,isLoading] = useAxios({
     axiosInstance: axios,
@@ -35,7 +34,7 @@ const RecipesPage = () => {
         <header className="max-w-xl md:mx-auto text-center">
 
           <div className="flex justify-center items-center space-x-2 mb-4 mt-4">
-          <img className="mb-6" src="../images/recipe-icon.png"></img>
+          <img className="mb-6" alt="recipe icon" src="../images/recipe-icon.png"></img>
             <h2 className="mb-6 font-sans font-bold tracking-widest text-2xl uppercase text-orange-500 m-0">
             All Recipes
             </h2>
@@ -138,9 +137,9 @@ const RecipesPage = () => {
                     alt="Avatar"
                   />
                   <div className="flex flex-col mx-2">
-                    <a href="" className="font-semibold text-gray-700 hover:underline">
+                    <p className="font-semibold text-gray-700 hover:underline">
                       {recipe.author}
-                    </a>
+                    </p>
                     <span className="mx-1 text-xs text-gray-600">{new Date(recipe.createdAt).toLocaleString()}</span>
                   </div>
                 </div>

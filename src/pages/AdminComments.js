@@ -22,6 +22,7 @@ const AdminComments = () => {
     const handlDeleteComment = async(comment) => {
         try {
           const toast_id = toast.loading("Please wait...")
+          // eslint-disable-next-line
           const response = await axiosPrivate.delete(`comments/${comment._id}`,
           {
             headers: { "Content-Type": "application/json" },
@@ -41,7 +42,10 @@ const AdminComments = () => {
           setSelectedComment(null);
     
         } catch (error) {
-          console.log(error);
+            if(!isError)
+            {
+              setError(error.response.data.message);
+            }
         }
       }
 
@@ -62,6 +66,7 @@ const AdminComments = () => {
             }
             fetchCommentsUser();
         }
+        // eslint-disable-next-line
     },[selectedComment])
     
     const handleCommentClick = (comment) => {

@@ -19,7 +19,7 @@ const StartHerePage = () => {
     </div>
     <div className=" items-center justify-center text-center">
     <div className="w-full h-full ">
-            <img src="./images/cooking-tips-article.jpeg" className="w-full mb-8 sm:h-full mx-auto" viewBox="0 0 1177 598.5" >
+            <img src="./images/cooking-tips-article.jpeg" alt="cooking tips" className="w-full mb-8 sm:h-full mx-auto" viewBox="0 0 1177 598.5" >
             </img>
           </div>
 <p className="text-orange-500 font-bold">Cooking is one of life’s great pleasures but can also be a source of stress.</p>
@@ -57,14 +57,14 @@ const StartHerePage = () => {
             </div>
           </div>
           <div className="w-full sm:w-1/2 p-6">
-            <img src="/images/science-cooking.jpeg" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
+            <img src="/images/science-cooking.jpeg" alt="cooking tips" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
             </img>
           </div>
         </div>
 
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <img src="/images/05-Importance of measuring.jpg" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
+            <img src="/images/05-Importance of measuring.jpg"  alt="cooking tips"className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
             </img>
           </div>
           <div className="w-full sm:w-1/2 p-6 mt-6">
@@ -92,14 +92,14 @@ Density also comes into play with various foods, especially with different types
   </p>
 </div>
 <div className="w-full sm:w-1/2 p-6">
-  <img src="/images/cookware.webp" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
+  <img src="/images/cookware.webp"  alt="cooking tips"className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
   </img>
 </div>
 </div>
 
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <img src="/images/cook-oil.jpeg" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
+            <img src="/images/cook-oil.jpeg" alt="cooking tips" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
             </img>
           </div>
           <div className="w-full sm:w-1/2 p-6 mt-6">
@@ -127,7 +127,7 @@ We also use a separate oven thermometer. The temperature display on the front pa
   </p>
 </div>
 <div className="w-full sm:w-1/2 p-6">
-  <img src="/images/temp-Reader.webp" className="w-full sm:h-90 mx-auto" viewBox="0 0 1177 598.5" >
+  <img src="/images/temp-Reader.webp" alt="cooking tips" className="w-full sm:h-90 mx-auto" viewBox="0 0 1177 598.5" >
   </img>
 </div>
 </div>
@@ -135,7 +135,7 @@ We also use a separate oven thermometer. The temperature display on the front pa
 
 <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <img src="/images/carry-food.jpeg" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
+            <img src="/images/carry-food.jpeg" alt="cooking tips" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
             </img>
           </div>
           <div className="w-full sm:w-1/2 p-6 mt-6">
@@ -162,14 +162,14 @@ Pay attention to the instructions for baking treats and bread as carryover cooki
   </p>
 </div>
 <div className="w-full sm:w-1/2 p-6">
-  <img src="/images/steak.jpg" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
+  <img src="/images/steak.jpg" alt="cooking tips" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
   </img>
 </div>
 </div>
 
 <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <img src="/images/types-of-salt.jpg" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
+            <img src="/images/types-of-salt.jpg" alt="cooking tips" className="w-full sm:h-80  mx-auto" viewBox="0 0 1176.60617 873.97852" >
             </img>
           </div>
           <div className="w-full sm:w-1/2 p-6 mt-6">
@@ -199,7 +199,7 @@ Baking powder can also help to tenderize meat. It’s a technique often used in 
   </p>
 </div>
 <div className="w-full sm:w-1/2 p-6">
-  <img src="/images/Baking-Soda-Baking-Powder1.jpg" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
+  <img src="/images/Baking-Soda-Baking-Powder1.jpg" alt="cooking tips" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
   </img>
 </div>
 </div>
@@ -218,7 +218,7 @@ Baking powder can also help to tenderize meat. It’s a technique often used in 
             </div>
           </div> 
           <div className="w-full h-full mt-6">
-            <img src="/images/food-safety.jpeg" className="w-full sm: mx-auto" viewBox="0 0 1176.60617 873.97852" >
+            <img src="/images/food-safety.jpeg" alt="cooking tips" className="w-full sm: mx-auto" viewBox="0 0 1176.60617 873.97852" >
             </img>
           </div>
         </div>

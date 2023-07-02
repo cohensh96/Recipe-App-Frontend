@@ -15,14 +15,10 @@ const Adminpage = () => {
   });
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const [EditSection, setIsEditSection] = useState('');
   const [isEdit, setIsEdit] = useState(false);
-  const [editComment, setEditComment] = useState('');
 
-  const [rolesEdit, setRolesEdit] = useState([]);
   const handleEditUser = (userId) => {
     setIsEdit(prev => !prev);
-    setRolesEdit(userId.roles);
 
   };
   const handleSaveChanges = async(selectedUser) => {
@@ -33,6 +29,7 @@ const Adminpage = () => {
       roles:roles
     }
     try {
+      //eslint-disable-next-line
       const response = await axiosPrivate.put('user/handle',data, {
         withCredentials: true
       });
@@ -63,10 +60,9 @@ const Adminpage = () => {
   }
   const handleDeleteUser = async(selectedUser) => {
     const toast_id = toast.loading("Please wait...")
-    const data = {
-      id:selectedUser._id,
-    }
+
     try {
+      //eslint-disable-next-line
       const response = await axiosPrivate.delete(`user/handle`,
       {
         headers: { "Content-Type": "application/json" },
@@ -104,7 +100,6 @@ const Adminpage = () => {
   const handleUserClick = (user) => {
     setSelectedUser(user);
     setIsEdit(false);
-    setRolesEdit([]);
   };
 
   return (

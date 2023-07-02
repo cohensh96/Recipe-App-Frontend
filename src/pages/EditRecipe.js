@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import useImage from '../hooks/useImage';
 import { useState, useEffect } from 'react';
-import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
@@ -16,21 +15,12 @@ const EditRecipe = () => {
 
   const getImage = useImage;
   const axiosPrivate = useAxiosPrivate();
-  const { auth } = useAuth();
 
   const [category, setCategory] = useState("");
   const [ingredient, setIngredient] = useState("");
   const [errorMsg, setError] = useState(null);
-   const [error,setErrorData] = useState('');
+  const [error,setErrorData] = useState('');
   const [loading,setLoading] = useState(true);
-  // const [data, error, loading] = useAxios({
-  //   axiosInstance: axios,
-  //   method: "GET",
-  //   url: `recipe/${id}`,
-  //   requestConfig: {
-  //     'Content-Language': "en-US"
-  //   }
-  // });
 
   const [recipeEdit, setRecipeEdit] = useState({
     id:"",
@@ -66,12 +56,9 @@ const EditRecipe = () => {
       }
     }
     fetchRecipes();
-
+    //eslint-disable-next-line
   },[])
 
-  useEffect(() => {
-    console.log(recipeEdit);
-  }, [recipeEdit])
 
   const handleInputChange = (event) => {
     setRecipeEdit({

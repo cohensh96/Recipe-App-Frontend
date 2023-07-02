@@ -18,10 +18,8 @@ const AdmingRecipes = () => {
 
   const handleDeleteUser = async(selectedRecipe) => {
     const toast_id = toast.loading("Please wait...")
-    const data = {
-      id:selectedRecipe._id,
-    }
     try {
+    //eslint-disable-next-line
     const response = await axiosPrivate.delete(`recipe`,
     {
           headers: { "Content-Type": "application/json" },

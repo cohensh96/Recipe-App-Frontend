@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useAuth from "../hooks/useAuth";
 const UpdateProfile = () => {
-  const { id } = useParams();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
-  const { auth } = useAuth();
-
-  const validInputClass =
-    "peer h-full w-full rounded-md border border-blue-gray-300 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-300 placeholder-shown:border-t-blue-gray-300 focus:border-2 focus:border-orange-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50";
-  const validLabelClass =
-    "block text-gray-700 before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-orange-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-orange-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-orange-500 peer-disabled:text-transparent  peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500";
 
   const [errorMsg, setError] = useState(null);
   const [error, setErrorData] = useState("");
@@ -30,8 +22,8 @@ const UpdateProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axiosPrivate.get(`user/${id}`);
-  
+        const response = await axiosPrivate.get(`user`);
+        console.log(response);
         setUserData({
           id: response.data._id,
           username: response.data.username,
@@ -42,13 +34,14 @@ const UpdateProfile = () => {
           confirm: response.data.password,
         });
       } catch (error) {
-        setErrorData(error);
+        setErrorData(error.response.data.message);
      
       } finally {
         setLoading(false);
       }
     };
     fetchUser();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -84,7 +77,7 @@ const UpdateProfile = () => {
       navigate(`/profile`);
     } catch (error) {
       if (error.response) {
-        const { status, data } = error.response;
+        const { data } = error.response;
         setError(data.message);
          if (
            data.message === "Missing few fields in user data."
@@ -104,6 +97,9 @@ const UpdateProfile = () => {
 
   return (
     <div>
+      {loading && <p>Loading...</p>}
+      {!loading && error && <p>{error}</p>}
+      {!loading&&!error && userData.id !== "" &&
       <form
         onSubmit={handleSubmit}
         className="flex h-full flex-col items-center justify-evenly"
@@ -213,7 +209,7 @@ const UpdateProfile = () => {
           Update
         </button>
         {errorMsg && <p className="text-red-500 font-bold text-1xl mt-5">{errorMsg}</p>}
-      </form>
+      </form>}
 
       <ToastContainer closeOnClick={false} closeButton={false} />
     </div>
