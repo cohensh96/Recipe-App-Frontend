@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
 
@@ -12,6 +13,7 @@ const LOGIN_URL = "/login";
  */
 const Login = ({ setView, setIsLogin }) => {
   const { setAuth, persist, setPersist } = useAuth();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -49,6 +51,8 @@ const Login = ({ setView, setIsLogin }) => {
       setIsLogin(false);
       setUser("");
       setPassword("");
+      // Navigate to the profile page
+      navigate('/profile');
     } catch (error) {
       const { data } = error.response;
       setUsernameBorderColor(false);
