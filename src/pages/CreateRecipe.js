@@ -7,90 +7,111 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const CreateRecipe = () => {
-  const navegate = useNavigate ();
+  // Custom hooks
+  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+
+  // State variables
   const [recipeName, setRecipeName] = useState("");
   const [recipeDesc, setRecipeDesc] = useState("");
   const [recipeCallories, setRecipeCalloires] = useState("");
   const [recipeCooking, setRecipeCooking] = useState("");
-  const [catagory, setCatgory] = useState("");
-  const [recipeCategorys, setRecipeCatgory] = useState([]);
+  const [category, setCategory] = useState("");
+  const [recipeCategories, setRecipeCategory] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [isShown, setIsShown] = useState(false);
-  const [ingrident, setIngrdient] = useState();
-  const [recipeIngredients, setRecipeIngridenets] = useState([]);
-  
+  const [ingredient, setIngredient] = useState();
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formdata = new FormData(event.target);
-    formdata.set("recipeingredients", recipeIngredients);
-    formdata.set("recipecatagorys", recipeCategorys);
-    console.log(formdata.get("recipename"));
+    const formData = new FormData(event.target);
+    formData.set("recipeingredients", recipeIngredients);
+    formData.set("recipecatagorys", recipeCategories);
+    console.log(formData.get("recipename"));
+
     const data = {
-      recipename: formdata.get("recipename"),
-      recipedescription: formdata.get("recipedescription"),
+      recipename: formData.get("recipename"),
+      recipedescription: formData.get("recipedescription"),
       recipeingredients: recipeIngredients,
-      recipedifficulty: formdata.get("recipedifficulty"),
-      recipecallories: formdata.get("recipecallories"),
-      recipecatagorys: recipeCategorys,
-      recipeTime: formdata.get("recipeTime"),
-      uploadedImage: formdata.get("uploadedImage"),
+      recipedifficulty: formData.get("recipedifficulty"),
+      recipecallories: formData.get("recipecallories"),
+      recipecatagorys: recipeCategories,
+      recipeTime: formData.get("recipeTime"),
+      uploadedImage: formData.get("uploadedImage"),
     };
-   
+
     try {
+      // Use toast.promise to display loading and success/error messages
       const response = await toast.promise(
         axiosPrivate.post("/recipe", data, {
           headers: { "Content-Type": "multipart/form-data" },
         }),
         {
-          pending: 'recipe creation is pending',
-          success: 'recipe have been created 👌',
-          error: 'Request has been deined try again later'
+          pending: 'Recipe creation is pending',
+          success: 'Recipe has been created 👌',
+          error: 'Request has been denied, try again later'
         },
-    );
-      navegate(`/recipe/${response.data._id}`)
+      );
+
+      // Navigate to the created recipe page
+      navigate(`/recipe/${response.data._id}`);
     } catch (error) {
       setErrorMsg(error.response.data.message);
-      
     }
   };
-  
-  const handleDeleteCatagory = (deleteItem) => {
-    setRecipeCatgory((oldValues) => {
+
+  const handleDeleteCategory = (deleteItem) => {
+    // Remove the specified category from the recipeCategories state
+    setRecipeCategory((oldValues) => {
       return oldValues.filter((item) => item !== deleteItem);
     });
   };
+
   const handleDelete = (deleteItem) => {
-    setRecipeIngridenets((oldValues) => {
+    // Remove the specified ingredient from the recipeIngredients state
+    setRecipeIngredients((oldValues) => {
       return oldValues.filter((item) => item !== deleteItem);
     });
   };
-  const handleCatagoryAdd = (event) => {
-    if (!recipeCategorys) {
-      setRecipeCatgory([catagory]);
+
+  const handleCategoryAdd = (event) => {
+    if (!recipeCategories) {
+      setRecipeCategory([category]);
       return;
     }
-    if(catagory === "")
-     return;
-    const duplicate = recipeCategorys.find(
-      (singleCategroy) => singleCategroy === catagory
+    if (category === "") {
+      return;
+    }
+
+    // Check if the category already exists in the recipeCategories state
+    const duplicate = recipeCategories.find(
+      (singleCategory) => singleCategory === category
     );
+
     if (!duplicate) {
-      setRecipeCatgory([...recipeCategorys, catagory]);
+      // Add the category to the recipeCategories state
+      setRecipeCategory([...recipeCategories, category]);
     }
   };
+
   const handleAdd = (event) => {
     if (!recipeIngredients) {
-      setRecipeIngridenets([ingrident]);
+      setRecipeIngredients([ingredient]);
       return;
     }
-    if(ingrident === "")
+    if (ingredient === "") {
       return;
+    }
+
+    // Check if the ingredient already exists in the recipeIngredients state
     const duplicate = recipeIngredients.find(
-      (singleIngrdient) => singleIngrdient === ingrident
+      (singleIngredient) => singleIngredient === ingredient
     );
+
     if (!duplicate) {
-      setRecipeIngridenets([...recipeIngredients, ingrident]);
+      // Add the ingredient to the recipeIngredients state
+      setRecipeIngredients([...recipeIngredients, ingredient]);
     }
   };
 
@@ -239,8 +260,8 @@ const CreateRecipe = () => {
                     name="recipeingredients"
                     id="recipeingredients"
                     placeholder="Enter Recipe Ingredient"
-                    value={ingrident}
-                    onChange={(e) => setIngrdient(e.target.value)}
+                    value={ingredient}
+                    onChange={(e) => setIngredient(e.target.value)}
                   />
                 </div>
                 <div className="flex justify-center items-center">
@@ -282,15 +303,15 @@ const CreateRecipe = () => {
                     name="recipecatagorys"
                     id="recipecatagorys"
                     placeholder="Enter Recipe Catgory"
-                    value={catagory}
-                    onChange={(e) => setCatgory(e.target.value)}
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
                   />
                 </div>
                 <div className="flex justify-center items-center">
                   <button
                     type="button"
                     className=" h-12 mt-6 text-gray-800 transition-colors duration-150 font-bold rounded border-b-2 border-amber-500 hover:border-orange-600 hover:bg-orange-500 hover:text-white shadow-xl py-2 px-6 inline-flex items-center"
-                    onClick={() => handleCatagoryAdd()}
+                    onClick={() => handleCategoryAdd()}
                   >
                     <span className="mr-2">Add</span>
                     <FaPlusCircle />
@@ -299,12 +320,12 @@ const CreateRecipe = () => {
               </section>
               <section>
                 <ul className="flex flex-wrap">
-                  {recipeCategorys &&
-                    recipeCategorys.map((singleing, index) => (
+                  {recipeCategories &&
+                    recipeCategories.map((singleing, index) => (
                       <button
                         className="bg-orange-300 transition-colors duration-150 hover:bg-orange-500 text-white py-2 px-4 rounded inline-flex items-center m-1"
                         key={index}
-                        onClick={() => handleDeleteCatagory(singleing)}
+                        onClick={() => handleDeleteCategory(singleing)}
                       >
                         {singleing} <FaTrash className="ml-1" />
                       </button>

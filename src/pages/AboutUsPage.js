@@ -1,4 +1,9 @@
 
+/**
+ * Component representing the About Us page.
+ *
+ * @returns {JSX.Element} About Us page component.
+ */
 const AboutUsPage = () => {
 
     return (
@@ -130,16 +135,6 @@ const AboutUsPage = () => {
         </div>
         
       </div>
-
-
-
-</section>
-
-
-
-
-
-        );
-    };
-    
+</section>);
+};
     export default AboutUsPage;

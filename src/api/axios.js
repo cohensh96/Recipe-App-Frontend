@@ -1,12 +1,24 @@
 import axios from 'axios';
-const BASE_URL = "https://recipe-app-api-khxh.onrender.com"
-//const BASE_URL='http://localhost:3500'
+
+// The base URL for the API
+const BASE_URL = "https://recipe-app-api-khxh.onrender.com";
+// You can also use a local URL for development purposes
+// const BASE_URL = 'http://localhost:3500';
+
+/**
+ * Creates an instance of axios with the base URL.
+ * This instance can be used for making API requests.
+ */
 export default axios.create({
     baseURL: BASE_URL
 });
 
-export const axoisPrivate =  axios.create({
+/**
+ * Creates a separate instance of axios with the base URL and additional configuration.
+ * This instance is intended for making private API requests that require authentication.
+ */
+export const axoisPrivate = axios.create({
     baseURL: BASE_URL,
-    headers: {"Content-Type" : "application/json"},
+    headers: { "Content-Type": "application/json" },
     withCredentials: true
 });

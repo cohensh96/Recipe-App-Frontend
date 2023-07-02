@@ -1,106 +1,142 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import useAxios from '../hooks/useAxios';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Adminpage = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const [usersList, error, loading, refetch] = useAxios({
-    axiosInstance: axiosPrivate,
-    method: 'GET',
-    url: 'user/handle',
-    requestConfig: {
-      'Content-Language': 'en-US',
-    },
-  });
-  const [selectedUser, setSelectedUser] = useState(null);
-
-  const [isEdit, setIsEdit] = useState(false);
-
-  const handleEditUser = (userId) => {
-    setIsEdit(prev => !prev);
-
-  };
-  const handleSaveChanges = async(selectedUser) => {
-    const toast_id = toast.loading("Please wait...")
-    const roles = selectedUser.roles.Admin ? {"User":80085} : {"Admin":420420,"User":80085};
-    const data = {
-      id:selectedUser._id,
-      roles:roles
-    }
-    try {
-      //eslint-disable-next-line
-      const response = await axiosPrivate.put('user/handle',data, {
-        withCredentials: true
-      });
-      toast.update(toast_id, 
-        { render: `${selectedUser.username} info has been update.`,
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored", type: "info", isLoading: false });     
-        await refetch();
-        setSelectedUser(null);
-    } catch (error) {
-      toast.update(toast_id, 
-        { render: `${error}`,
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored", type: "error", isLoading: false });   
-    }
-  }
-  const handleDeleteUser = async(selectedUser) => {
-    const toast_id = toast.loading("Please wait...")
-
-    try {
-      //eslint-disable-next-line
-      const response = await axiosPrivate.delete(`user/handle`,
-      {
-        headers: { "Content-Type": "application/json" },
-        data: {
-          id: selectedUser._id
-        },
-        withCredentials: true,
-      });
-      toast.update(toast_id, 
-        { render: `${selectedUser.username} the user has been delete.`,
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        type: "error", isLoading: false });     
-        await refetch();
-        setSelectedUser(null);
-    } catch (error) {
-      toast.update(toast_id, 
-        { render: `${error}`,
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored", type: "error", isLoading: false });   
-    }
-  };
-
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-    setIsEdit(false);
-  };
+   // Custom hook for private axios instance
+   const axiosPrivate = useAxiosPrivate();
+   const toast_id = useRef(null);
+   // State variables
+   const [usersList, error, loading, refetch] = useAxios({
+     axiosInstance: axiosPrivate,
+     method: 'GET',
+     url: 'user/handle',
+     requestConfig: {
+       'Content-Language': 'en-US',
+     },
+   });
+   const [selectedUser, setSelectedUser] = useState(null);
+   const [isEdit, setIsEdit] = useState(false);
+ 
+   // Function to toggle the edit mode for a user
+   const handleEditUser = (userId) => {
+     setIsEdit(prev => !prev);
+   };
+ 
+   // Function to save the changes made to a user
+   const handleSaveChanges = async (selectedUser) => {
+     try {
+       // Show a loading toast while the save request is being processed
+      toast_id.current = toast.loading("Please wait...");
+ 
+       // Determine the updated roles based on the current state
+       const roles = selectedUser.roles.Admin ? { "User": 80085 } : { "Admin": 420420, "User": 80085 };
+ 
+       // Prepare the data for the PUT request
+       const data = {
+         id: selectedUser._id,
+         roles: roles
+       }
+ 
+       // Send a PUT request to update the user
+        // eslint-disable-next-line
+       const response = await axiosPrivate.put('user/handle', data, {
+         withCredentials: true
+       });
+ 
+       // Update the loading toast with a success message
+       toast.update(toast_id.current, {
+         render: `${selectedUser.username} info has been updated.`,
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "colored",
+         type: "info",
+         isLoading: false
+       });
+ 
+       // Refetch the user list after saving changes to update the UI
+       await refetch();
+       setSelectedUser(null);
+     } catch (error) {
+       // If an error occurs, update the loading toast with an error message
+       toast.update(toast_id.current, {
+         render: `${error}`,
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "colored",
+         type: "error",
+         isLoading: false
+       });
+     }
+   }
+ 
+   // Function to delete a user
+   const handleDeleteUser = async (selectedUser) => {
+     try {
+       // Show a loading toast while the delete request is being processed
+       const toast_id = toast.loading("Please wait...");
+ 
+       // Send a delete request to delete the user
+      // eslint-disable-next-line
+       const response = await axiosPrivate.delete(`user/handle`, {
+         headers: { "Content-Type": "application/json" },
+         data: {
+           id: selectedUser._id
+         },
+         withCredentials: true,
+       });
+ 
+       // Update the loading toast with a success message
+       toast.update(toast_id, {
+         render: `${selectedUser.username} the user has been deleted.`,
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         type: "error",
+         isLoading: false
+       });
+ 
+       // Refetch the user list after deletion to update the UI
+       await refetch();
+       setSelectedUser(null);
+     } catch (error) {
+       // If an error occurs, update the loading toast with an error message
+       toast.update(toast_id, {
+         render: `${error}`,
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "colored",
+         type: "error",
+         isLoading: false
+       });
+     }
+   };
+ 
+   // Handle click on a user
+   const handleUserClick = (user) => {
+     setSelectedUser(user);
+     setIsEdit(false);
+   };
 
   return (
     <section className="p-4">

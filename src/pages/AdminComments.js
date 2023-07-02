@@ -4,7 +4,9 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { ToastContainer, toast } from 'react-toastify';
 
 const AdminComments = () => {
+    // Custom hook for private axios instance
     const axiosPrivate = useAxiosPrivate();
+    // State variables
     const [usersList, error, loading, refetch] = useAxios({
         axiosInstance: axiosPrivate,
         method: 'GET',
@@ -18,9 +20,11 @@ const AdminComments = () => {
     const [isLoadingCommnets, setLoading] = useState(false);
     const [isError, setError] = useState("");
     const [comments, setComments] = useState([]);
-  
+
+    // Function to delete a comment
     const handlDeleteComment = async(comment) => {
         try {
+          // Show a loading toast while the delete request is being processed
           const toast_id = toast.loading("Please wait...")
           // eslint-disable-next-line
           const response = await axiosPrivate.delete(`comments/${comment._id}`,
@@ -28,6 +32,7 @@ const AdminComments = () => {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           });
+          // Update the loading toast with a success message
           toast.update(toast_id, 
           { render: `comment has been deleted.`,
           position: "top-right",
@@ -48,10 +53,11 @@ const AdminComments = () => {
             }
         }
       }
-
+    // Fetch comments when a user is selected
     useEffect(() => {
         if(selectedComment != null)
         {
+            // Fetch comments for the selected user
             const fetchCommentsUser = async() => {
                 try {
                     const response = await axiosPrivate.get(`comments/admin/${selectedComment.username}`);
@@ -69,12 +75,15 @@ const AdminComments = () => {
         // eslint-disable-next-line
     },[selectedComment])
     
+    // Handle click on a comment
     const handleCommentClick = (comment) => {
-        setUserSelectedComment(comment.comment);
-    }
-    const handleUserClick = (user) => {
-      setSelectedComment(user);
-    };
+      setUserSelectedComment(comment.comment);
+  }
+
+  // Handle click on a user
+  const handleUserClick = (user) => {
+    setSelectedComment(user);
+  };
   
     return (
       <section className="p-4">

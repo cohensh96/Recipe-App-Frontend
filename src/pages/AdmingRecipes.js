@@ -1,62 +1,78 @@
-import {  useState } from 'react';
+import {  useState, useRef } from 'react';
 import useAxios from '../hooks/useAxios';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { ToastContainer, toast } from 'react-toastify';
 
 const AdmingRecipes = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const [recipes, error, loading, refetch] = useAxios({
-    axiosInstance: axiosPrivate,
-    method: 'GET',
-    url: 'recipe',
-    requestConfig: {
-      'Content-Language': 'en-US',
-    },
-  });
-  const [selectedRecipe, setSelectedUser] = useState(null);
+ // Custom hook for private axios instance
+ const axiosPrivate = useAxiosPrivate();
+ const toast_id = useRef(null);
+ // State variables
+ const [recipes, error, loading, refetch] = useAxios({
+   axiosInstance: axiosPrivate,
+   method: 'GET',
+   url: 'recipe',
+   requestConfig: {
+     'Content-Language': 'en-US',
+   },
+ });
+ const [selectedRecipe, setSelectedRecipe] = useState(null);
 
+ // Function to delete a recipe
+ const handleDeleteRecipe = async (selectedRecipe) => {
+   try {
+     // Show a loading toast while the delete request is being processed
+     toast_id.current = toast.loading("Please wait...");
 
-  const handleDeleteUser = async(selectedRecipe) => {
-    const toast_id = toast.loading("Please wait...")
-    try {
-    //eslint-disable-next-line
-    const response = await axiosPrivate.delete(`recipe`,
-    {
-          headers: { "Content-Type": "application/json" },
-          data: {
-            id: selectedRecipe._id
-          },
-          withCredentials: true,
+     // Send a delete request to delete the recipe
+     // eslint-disable-next-line
+     const response = await axiosPrivate.delete(`recipe`, {
+       headers: { "Content-Type": "application/json" },
+       data: {
+         id: selectedRecipe._id
+       },
+       withCredentials: true,
      });
-      toast.update(toast_id, 
-        { render: `${selectedRecipe.recipeName} recipe has been deleted.`,
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        type: "error", isLoading: false });     
-        await refetch();
-        setSelectedUser(null);
-    } catch (error) {
-      toast.update(toast_id, 
-        { render: `${error}`,
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored", type: "error", isLoading: false });   
-    }
-  };
 
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-  };
+     // Update the loading toast with a success message
+     toast.update(toast_id.current, {
+       render: `${selectedRecipe.recipeName} recipe has been deleted.`,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       type: "error",
+       isLoading: false
+     });
+
+     // Refetch the recipes after deletion to update the UI
+     await refetch();
+     setSelectedRecipe(null);
+   } catch (error) {
+     // If an error occurs, update the loading toast with an error message
+     toast.update(toast_id.current, {
+       render: `${error}`,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "colored",
+       type: "error",
+       isLoading: false
+     });
+   }
+ };
+
+ // Handle click on a recipe
+ const handleRecipeClick = (recipe) => {
+   setSelectedRecipe(recipe);
+ };
 
   return (
     <section className="p-4">
@@ -75,7 +91,7 @@ const AdmingRecipes = () => {
                       ? 'bg-blue-100'
                       : ''
                   }`}
-                  onClick={() => handleUserClick(recipe)}
+                  onClick={() => handleRecipeClick(recipe)}
                 >
                     <div className='flex justify-between'>
                     <p className="text-gray-700">{recipe.recipeName}</p>
@@ -110,7 +126,7 @@ const AdmingRecipes = () => {
               <div className='flex flex-col w-fit'>
                 <button
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleDeleteUser(selectedRecipe)}
+                  onClick={() => handleDeleteRecipe(selectedRecipe)}
                 >
                   Delete Recipe
                 </button>
