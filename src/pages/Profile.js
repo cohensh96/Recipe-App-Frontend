@@ -122,7 +122,6 @@ const Profile = () => {
         },
         withCredentials: true,
       });
-      console.log(response);
       toast.update(toast_id.current, 
       { render: `${response.data.recipeName} has been deleted.`,
       position: "top-right",

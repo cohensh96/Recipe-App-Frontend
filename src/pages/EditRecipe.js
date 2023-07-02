@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import useImage from '../hooks/useImage';
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const EditRecipe = () => {
   const {id} = useParams();
   const navigate = useNavigate();
+  const toast_id = useRef(null);
 
   const getImage = useImage;
   const axiosPrivate = useAxiosPrivate();
@@ -70,9 +71,9 @@ const EditRecipe = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const toast_id = toast.loading("Please wait...")
+      toast_id.current = toast.loading("Please wait...")
       await axiosPrivate.put(`recipe`, recipeEdit);
-      toast.update(toast_id, 
+      toast.update(toast_id.current, 
         { render: `The recipe updated successfully!`,
         position: "top-right",
         autoClose: 5000,
