@@ -265,7 +265,7 @@ const SearchPage = () => {
               <div className=" items-center ">
                 <img
                   className=" w-400 h-500 rounded"
-                  src="../public/images/search-no-result.jpg"
+                  src="./images/search-no-result.jpg"
                   alt="Picutre of Recipe"
                 ></img>
                 <h3
