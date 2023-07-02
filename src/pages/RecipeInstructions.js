@@ -1,4 +1,5 @@
-
+/** This component displays recipe instructions based on the value of the 'isShown' prop
+ * if isShown is true display recipe instructions otherwise does not display recipe instructions */ 
 const RecipeInstructions = ({ isShown }) => {
 
   return (

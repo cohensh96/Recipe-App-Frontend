@@ -3,10 +3,18 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UpdateProfile = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
 
+
+/**
+ * The UpdateProfile component is used to update user profile information.
+ * It fetches the user data from the server and allows the user to update their profile.
+ */
+const UpdateProfile = () => {
+  // Custom hook for making private Axios requests
+  const axiosPrivate = useAxiosPrivate();
+  // React Router hook for navigation
+  const navigate = useNavigate();
+  // State variables
   const [errorMsg, setError] = useState(null);
   const [error, setErrorData] = useState("");
   const [loading, setLoading] = useState(true);
@@ -19,9 +27,12 @@ const UpdateProfile = () => {
     lastname: "",
     confirm: "",
   });
+
+   // Fetch user data from the server when the component mounts
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        
         const response = await axiosPrivate.get(`user`);
         console.log(response);
         setUserData({
@@ -44,10 +55,8 @@ const UpdateProfile = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
+// Handle input changes in the form
   const handleInputChange = (event) => {
     setError(null);
     setUserData({
@@ -56,11 +65,15 @@ const UpdateProfile = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Show a loading toast message
       const toast_id = toast.loading("Please wait...");
+       // Send a PUT request to update the user profile
       await axiosPrivate.put(`user`, userData);
+       // Update the toast message to indicate success
       toast.update(toast_id, {
         render: `Your profile updated successfully!`,
         position: "top-right",
@@ -74,8 +87,10 @@ const UpdateProfile = () => {
         type: "success",
         isLoading: false,
       });
+       // Navigate to the profile page
       navigate(`/profile`);
     } catch (error) {
+       // Set error messages based on the response data
       if (error.response) {
         const { data } = error.response;
         setError(data.message);
@@ -97,10 +112,13 @@ const UpdateProfile = () => {
 
   return (
     <div>
+      {/* Loading state */}
       {loading && <p>Loading...</p>}
+
+       {/*  Update Your Profile form */}
       {!loading && error && <p>{error}</p>}
       {!loading&&!error && userData.id !== "" &&
-      <form
+     <form
         onSubmit={handleSubmit}
         className="flex h-full flex-col items-center justify-evenly"
       >
@@ -111,6 +129,8 @@ const UpdateProfile = () => {
             </h2>
           </div>
         </header>
+
+       
         <div className="relative h-11 w-full min-w-[200px] mt-8 mb-2 ">
         <label className="block text-gray-700 before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-orange-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-orange-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-orange-500 peer-disabled:text-transparent  peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
             Username:
@@ -208,9 +228,10 @@ const UpdateProfile = () => {
         >
           Update
         </button>
+         {/* If there is an error, display it the the user. */}
         {errorMsg && <p className="text-red-500 font-bold text-1xl mt-5">{errorMsg}</p>}
       </form>}
-
+       {/**toast */}
       <ToastContainer closeOnClick={false} closeButton={false} />
     </div>
   );

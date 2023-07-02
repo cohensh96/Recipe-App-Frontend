@@ -1,4 +1,8 @@
-
+/**
+ * Component representing the StartHerePage page.
+ * This page includes top 10 Cooking Tips For A Better Meal Every Time.
+ * @returns {JSX.Element} StartHerePage component.
+ */
 const StartHerePage = () => {
 
     return (

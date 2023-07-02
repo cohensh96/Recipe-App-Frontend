@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "../api/axios";
 import useImage from '../hooks/useImage';
 
+
+/**
+ * SortedRecipes component displays a list of recipes filtered by category.
+ */
 const SortedRecipes = () => {
   const { sortedByCategory } = useParams()
   const [recipes, setRecipes] = useState([]);
@@ -10,10 +14,12 @@ const SortedRecipes = () => {
   const getImage = useImage;
     useEffect(() => {
       const fetchData = async () => {
-        //get request
+         // Fetch recipe data
         const response = await axios.get('recipe');
         const data =  response.data;
         
+
+         // Filter recipes based on the sortedByCategory parameter
         const sortedRecipes = data.filter((recipe) => { 
             const foundCategory=(recipe.recipeCategorys).find((category)=> category.toLowerCase() === sortedByCategory.toLowerCase())
             if(foundCategory)
@@ -44,6 +50,8 @@ const SortedRecipes = () => {
             </p>
           </header>
         </div>
+
+          {/* Recipes By Category */}
         <section className="bg-white py-8 pb-8 pt-4 px-4 mx-auto md:max-w-5xl">
           <header className="max-w-xl md:mx-auto text-center">
             <div className="flex justify-center items-center space-x-2 mb-4">
@@ -58,6 +66,7 @@ const SortedRecipes = () => {
   
           <div className="container mx-auto flex  items-center flex-wrap pt-4 pb-12">
             {isLoading && <p>Loading..</p>}
+             {/* No Recipes Found --> displat appropiate message to the user.*/}
             {recipes.length===0 &&  <div className=" items-center ">   
                  <img
                  className=" w-400 h-500 rounded"
@@ -81,6 +90,8 @@ const SortedRecipes = () => {
         </NavLink>
         </div>
                </div>}
+
+             {/* Display Recipes */}
             {recipes && recipes.length!==0 &&
               !isLoading &&
               recipes.map((recipe) => (
@@ -94,6 +105,7 @@ const SortedRecipes = () => {
                   ></img>
                   
                   </div>
+
                   <div className="w-full md:w-2/3 flex flex-col flex-grow flex-shrink">
 
                   <div className=" flex justify-end  w-20 top-0 right-0 mt-4 ml-5 bg-orange-500 text-black rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase  flex justify-center items-center">

@@ -9,8 +9,9 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { FaTrash, FaClock, FaStar } from "react-icons/fa";
 import { BiEdit } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
-
+/** Recipe page */
 const RecipePage = () => {
+   // Custom hook for private axios instance
   const axiosPrivate = useAxiosPrivate();
   const getImage = useImage;
   let { id } = useParams();
@@ -24,6 +25,8 @@ const RecipePage = () => {
   const handleRatingChange = (newRating) => {
     setRating(newRating);
   };
+
+  // Fetch recipe data
   const [data, error, loading] = useAxios({
     axiosInstance: axios,
     method: "GET",
@@ -33,6 +36,7 @@ const RecipePage = () => {
     },
   });
 
+   // Fetch user data
   const [user, erroruser, loadinguser] = useAxios({
     axiosInstance: axiosPrivate,
     method: "GET",
@@ -41,6 +45,8 @@ const RecipePage = () => {
       "Content-Language": "en-US",
     },
   });
+
+  // Fetch comments data
   const [comments, commentserror, commentsloading, refetch] = useAxios({
     axiosInstance: axios,
     method: "GET",
@@ -49,6 +55,8 @@ const RecipePage = () => {
       "Content-Language": "en-US",
     },
   });
+
+  // Save edited comment and update it
   const handleSaveChanges = async (comment) => {
     try {
       const toast_id = toast.loading("Please wait...");
@@ -83,6 +91,8 @@ const RecipePage = () => {
       setErrorMsg(data.message);
     }
   };
+
+   // Delete comment and update comments list
   const handlDeleteComment = async (comment) => {
     try {
       const toast_id = toast.loading("Please wait...");

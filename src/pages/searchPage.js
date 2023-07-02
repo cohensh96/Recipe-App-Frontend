@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import useImage from '../hooks/useImage';
 import useAxios from '../hooks/useAxios';
 import axios from "../api/axios";
-
 import { NavLink, useLocation } from "react-router-dom";
+
+
+
+/**
+ * SearchPage component displays a search page for recipes.
+ */
 const SearchPage = () => {
   const getImage = useImage;
+  //Tags for searching.
   const tags = [
     "Hard",
     "Medium",
@@ -22,12 +28,14 @@ const SearchPage = () => {
     "Vegetrian",
     "Desserts",
   ];
+
+  // Get the search term from the location state
   const location = useLocation();
   const initialSearchTerm = location.state?.searchTerm || "";
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-
   const [selectedTags, setSelectedTags] = useState([]);
 
+  // Fetch all recipes data
   const [recipes,error,isLoading] = useAxios({
     axiosInstance: axios,
     method:"GET",
@@ -41,8 +49,11 @@ const SearchPage = () => {
     setSearchTerm(event.target.value);
   };
 
+  /**Handle with tag changes.
+   search terms contant is all the selected tags or the userws input.*/
   const handleTagChange = (event) => {
     const selected = event.target.value;
+    //If the tag is already selected.
     if (selectedTags.includes(selected)) {
       setSelectedTags(selectedTags.filter((tag) => tag !== selected));
       // Remove the tag from searchTerm when it's unchecked
@@ -56,10 +67,14 @@ const SearchPage = () => {
     }
   };
 
+  //Split the searchTerm
   const filteredRecipes = recipes.filter((recipe) => {
     const searchTerms = searchTerm.toLowerCase().split(" ");
 
     return (
+      /**Finds all the recipes according to the searchTerm
+       * The searchTerm inclutes all the selected tags and the user's input (term)
+      */
       searchTerms.some(
         (term) =>
           recipe.recipeName.toLowerCase().includes(term.toLowerCase()) ||
@@ -102,6 +117,7 @@ const SearchPage = () => {
         </div>
       </header>
 
+     {/* Search Form */}
       <div className=" md:max-w-3xl mx-auto justify-center">
         <div className="w-full mb-8 mt-4">
           <form className="search-form flex-1" role="search">
@@ -128,6 +144,7 @@ const SearchPage = () => {
                   <title>search</title>
                 </svg>
               </div>
+               {/* Search Input */}
               <input
                 className="
               block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500"
@@ -170,6 +187,7 @@ const SearchPage = () => {
           </form>
         </div>
 
+       {/* Search Results */}
         <div>
           <header className="border-b border-gray-400 pb-2 mb-3 mt-5">
             <h2 className=" text-2xl text-orange-500  tracking-widest  font-sans font-bold  uppercase">

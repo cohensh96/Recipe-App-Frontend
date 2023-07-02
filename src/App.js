@@ -1,3 +1,7 @@
+
+/**This is a JS file that configures the routing for a React application using 
+ * the react-router-dom library. It defines the routes and 
+ * their corresponding components to be rendered based on the current URL. */
 import {
   createBrowserRouter, 
   createRoutesFromElements,
@@ -12,6 +16,7 @@ import RootLayout from './layouts/RootLayout'
 
 // Auth
 import RequireAuth from './components/RequireAuth';
+
 //Pages
 import RecipesPage from './pages/RecipesPage';
 import HomePage from './pages/HomePage.js'
@@ -32,11 +37,13 @@ import Adminpage from './pages/Adminpage';
 import AdmingRecipes from './pages/AdmingRecipes';
 import AdminComments from './pages/AdminComments';
 
+// Define a mapping of roles to their corresponding values
 const ROLES_LIST = {
   'User': 80085,
   'Admin': 420420
 }
 
+// Create a BrowserRouter and define routes using createRoutesFromElements
 const router = createBrowserRouter(
   createRoutesFromElements(
   

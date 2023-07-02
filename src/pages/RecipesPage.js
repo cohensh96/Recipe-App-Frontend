@@ -4,9 +4,13 @@ import useImage from '../hooks/useImage';
 import useAxios from '../hooks/useAxios';
 import axios from "../api/axios";
 
+/**
+ * RecipesPage component displays a list of recipes.
+ */
 const RecipesPage = () => {
   const getImage = useImage;
 
+  // Fetch recipe data
   const [recipes,error,isLoading] = useAxios({
     axiosInstance: axios,
     method:"GET",
@@ -30,6 +34,8 @@ const RecipesPage = () => {
           </p>
         </header>
       </div>
+
+      {/* Recipes Section */}
       <section className="bg-white py-8 pb-8 pt-4 px-4 mx-auto md:max-w-5xl">
         <header className="max-w-xl md:mx-auto text-center">
 
@@ -41,6 +47,7 @@ const RecipesPage = () => {
           </div>
         </header>
 
+       {/* Recipes List , display all the recipes*/}
         <div className="container mx-auto grid md:grid-cols-2 pt-4 pb-12">
           {isLoading && <p>Loading..</p>}
           {!isLoading && error && <p>{error}</p>}
@@ -51,10 +58,12 @@ const RecipesPage = () => {
           className="transition-all duration-150 flex w-full px-4 py-6 h-full"
           key={recipe._id}
         >
+           {/* Recipe Card */}
           <div
             className="flex flex-col items-stretch w-full min-h-full pb-4 transition-all duration-150 bg-white rounded-lg shadow-lg hover:shadow-2xl"
           >
             <div className="md:flex-shrink-0">
+              {/* Recipe Image */}
               <img
                 src={getImage(recipe.Image)}
                 alt="Blog Cover"

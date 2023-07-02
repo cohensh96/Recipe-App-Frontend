@@ -1,3 +1,4 @@
+// Importing required modules and components
 import { Outlet, NavLink } from "react-router-dom";
 import logo from '../Logo.png'
 import {FaUser} from 'react-icons/fa';
@@ -5,11 +6,23 @@ import { useState, useEffect, useRef } from "react";
 import useAuth from '../hooks/useAuth';
 import Popup from '../components/Popup';
 
+
+/**
+ * The RootMobileLayout component is a navigation bar for mobile users.
+ * It provides a list of links to navigate the website.
+ * The navigation bar can be toggled open and closed with a button.
+ * 
+ * @param {Object} props - The props passed to the component.
+ * @param {Function} props.setIsLogin - Function to set the login state.
+ * @returns {JSX.Element} A navigation bar for mobile users.
+ */
 export const RootMobileLayout = ({ setIsLogin}) => {
   const [isOpen,setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
   const closeButton = useRef(null);
   const {auth} = useAuth();
+
+   // A hook to add and remove an event listener for clicks outside the navigation bar.
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isOpen && wrapperRef.current && !wrapperRef.current.contains(event.target) && !closeButton.current.contains(event.target))
@@ -21,6 +34,7 @@ export const RootMobileLayout = ({ setIsLogin}) => {
     };
     
   }, [wrapperRef, setIsOpen, isOpen]);
+
 
   return(
     <div className="relative md:p-0">
@@ -65,6 +79,14 @@ export const RootMobileLayout = ({ setIsLogin}) => {
   )
 }
 
+/**
+ * The RootLayoutDesktop component is a navigation bar for desktop users.
+ * It provides a list of links to navigate the website.
+ * 
+ * @param {Object} props - The props passed to the component.
+ * @param {Function} props.setIsLogin - Function to set the login state.
+ * @returns {JSX.Element} A navigation bar for desktop users.
+ */
 export const RootLayoutDesktop = ({setIsLogin}) => {
   return (
     <div className="hidden lg:block">
@@ -97,6 +119,17 @@ export const RootLayoutDesktop = ({setIsLogin}) => {
         </div>
   )
 }
+
+/**
+ * The RootLayout component is the main layout for the website.
+ * It includes a header with a navigation bar and a main section for content.
+ * The navigation bar changes between a mobile and desktop version based on the viewport size.
+ * There is a popup that appears when the user is not logged in.
+ * 
+ * @param {Object} props - The props passed to the component.
+ * @param {Function} props.setLogin - Function to set the initial login state.
+ * @returns {JSX.Element} The main layout for the website.
+ */
 export default function RootLayout({setLogin}) {
   const headerStyle = "header sticky top-0 bg-gradient-to-b from-zinc-200 from-60% backdrop-blur lg:px-8 lg:py-02 z-40"
   const [scrollPostion, setScrollPostion] = useState(0);
@@ -108,6 +141,7 @@ export default function RootLayout({setLogin}) {
     setScrollPostion(postion);
   }
 
+   // A hook to add and remove an event listener for scrolling.
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, {passive:true});
     return () => {
