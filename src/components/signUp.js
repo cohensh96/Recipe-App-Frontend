@@ -1,5 +1,5 @@
-import logo from "../Logo.png";
-import { useRef, useEffect, useState } from "react";
+
+import { useRef, useState } from "react";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import React from "react";
 import Popup from "reactjs-popup";
@@ -7,7 +7,6 @@ import "reactjs-popup/dist/index.css";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import axios from "../api/axios";
-import PopupLogin from './Popup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -34,8 +33,6 @@ const SignUp = ({ setView}) => {
   const [confirmPasswordBorderColor, setConfirmPasswordBorderColor] =useState(true);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
-
- 
   const [moveToLogin, setMoveToLogin] = useState(false);
 
   const validInputClass =
@@ -79,7 +76,6 @@ const SignUp = ({ setView}) => {
             withCredentials: true,
           }
         );
-        console.log(JSON.stringify(responseLogin?.data));
         const accessToken = responseLogin?.data?.accessToken;
         const roles = responseLogin?.data?.roles;
         const user = data.username;
@@ -88,13 +84,10 @@ const SignUp = ({ setView}) => {
         setIsLogin(false);
         navigate('/profile');
       }
-      console.log(responseRegister.data);
     } catch (error) {
       // Handle error response
       if (error.response) {
         const { status, data } = error.response;
-        console.log(status); 
-        console.log(data.message);
         if (
           data.message === "username taken already please try somthing else."
         ) {
@@ -115,7 +108,6 @@ const SignUp = ({ setView}) => {
           setError(data.message); 
         }
       } else {
-        console.log(error.message);
         setError("An error occurred.");
       }
     }
@@ -133,8 +125,6 @@ const SignUp = ({ setView}) => {
             type="text"
             name="username"
             minLength="4"
-            id=""
-            placeholder=" "
             autoFocus
             autoComplete="true"
             value={username}
@@ -161,8 +151,6 @@ const SignUp = ({ setView}) => {
             }
             type="password"
             name="password"
-            id=""
-            placeholder=" "
             minLength="8"
             value={password}
             onChange={(e) => {
@@ -189,8 +177,6 @@ const SignUp = ({ setView}) => {
             }
             type="password"
             name="confirm"
-            id=""
-            placeholder=" "
             minLength="8"
             value={confirm}
             onChange={(e) => {
@@ -215,8 +201,6 @@ const SignUp = ({ setView}) => {
             className={validInputClass}
             type="text"
             name="firstname"
-            id=""
-            placeholder=" "
             minLength="1"
             value={firstname}
             onChange={(e) => setFirstName(e.target.value)}
@@ -229,8 +213,6 @@ const SignUp = ({ setView}) => {
             className={validInputClass}
             type="text"
             name="lastname"
-            id=""
-            placeholder=" "
             minLength="1"
             value={lastname}
             onChange={(e) => setLastName(e.target.value)}
@@ -243,8 +225,6 @@ const SignUp = ({ setView}) => {
             className={emailBorderColor ? validInputClass : invalidInputClass}
             type="email"
             name="email"
-            id=""
-            placeholder=" "
             minLength="11"
             value={email}
             onChange={(e) => {
@@ -291,16 +271,15 @@ const SignUp = ({ setView}) => {
 
 
       <Popup className="relative bg-white rounded-lg" open={isSignUp} closeOnDocumentClick onClose={() => {
-        console.log('1');
         setMoveToLogin(true)
         }}>
         <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Registration Successful!
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Close modal</span>
+                <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" id="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                    <span className="sr-only">Close modal</span>
                 </button>
             </div>
             <div className="p-6 space-y-6">
@@ -312,8 +291,6 @@ const SignUp = ({ setView}) => {
             <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button 
                 onClick={() => {
-                  console.log('2');
-                  // setIsLogin(true) 
                    setView('login') 
                     setMoveToLogin(true) 
                    setIsSignUp(false)}
@@ -325,9 +302,7 @@ const SignUp = ({ setView}) => {
             </div>
           
         </Popup>
-        <ToastContainer/>
-{/* {moveToLogin && <PopupLogin  setIsLogin={setIsLogin} setView={setView}/>}; */}
-   
+        <ToastContainer/> 
     </div>
   );
 };

@@ -38,7 +38,7 @@ const CreateRecipe = () => {
       recipeTime: formdata.get("recipeTime"),
       uploadedImage: formdata.get("uploadedImage"),
     };
-    console.log(data);
+   
     try {
       const response = await toast.promise(
         axiosPrivate.post("/recipe", data, {
@@ -52,11 +52,11 @@ const CreateRecipe = () => {
     );
       navegate(`/recipe/${response.data._id}`)
     } catch (error) {
-      console.log(error);
-      setErrorMsg(data.message);
+      setErrorMsg(error.response.data.message);
       
     }
   };
+  
   const handleDeleteCatagory = (deleteItem) => {
     setRecipeCatgory((oldValues) => {
       return oldValues.filter((item) => item !== deleteItem);
@@ -134,7 +134,7 @@ const CreateRecipe = () => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} enctype="multipart/form-data">
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
               <section className="grid grid-cols-2 gap-6 mt-4">
                 <div>
                   <label
@@ -153,7 +153,7 @@ const CreateRecipe = () => {
                     onChange={(e) => setRecipeName(e.target.value)}
                     placeholder="Enter Recipe Name"
                     required
-                    autoFocus
+                    
                   />
                 </div>
               </section>

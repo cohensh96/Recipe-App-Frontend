@@ -27,7 +27,6 @@ const AdminComments = () => {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           });
-          console.log(response);
           toast.update(toast_id, 
           { render: `comment has been deleted.`,
           position: "top-right",
@@ -53,7 +52,6 @@ const AdminComments = () => {
                 try {
                     const response = await axiosPrivate.get(`comments/admin/${selectedComment.username}`);
                     setComments(response.data);
-                    console.log(response.data);
                 } catch (error) {
                     setError(error.message);
                 }

@@ -2,7 +2,6 @@ import { Outlet, NavLink } from "react-router-dom";
 import logo from '../Logo.png'
 import {FaUser} from 'react-icons/fa';
 import { useState, useEffect, useRef } from "react";
-import Login from '../components/Login';
 import useAuth from '../hooks/useAuth';
 import Popup from '../components/Popup';
 

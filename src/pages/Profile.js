@@ -94,7 +94,6 @@ const Profile = () => {
         setCollection(response.data);
       } catch (error) {
         setErrorRecipes(error);
-        console.log(error);
       }
       finally {
         setIsLoadingRecipes(false);

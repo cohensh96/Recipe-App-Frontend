@@ -5,7 +5,6 @@ import useImage from '../hooks/useImage';
 
 const SortedRecipes = () => {
   const { sortedByCategory } = useParams()
-  console.log(sortedByCategory)
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const getImage = useImage;
@@ -24,7 +23,6 @@ const SortedRecipes = () => {
         
         setIsLoading(false);
         setRecipes(sortedRecipes);
-        console.log(sortedRecipes); 
       };
       fetchData();
     }, []);

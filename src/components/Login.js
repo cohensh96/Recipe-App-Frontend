@@ -1,6 +1,5 @@
-import logo from "../Logo.png";
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 import axios from "../api/axios";
@@ -11,7 +10,6 @@ const Login = ({ setView, setIsLogin }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -31,7 +29,6 @@ const invalidLabelClass =
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //username,pwd
       const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ username: user, pwd: password }),
@@ -58,7 +55,6 @@ const invalidLabelClass =
        }else if(data.message==="username or password dosent match."){
           setError("Wrong username or passsword.")
        }else {
-        console.log(error.message); 
         setError("An error occurred."); 
       
       }
@@ -77,11 +73,9 @@ const invalidLabelClass =
     <div className="relative lg:h-11 w-full min-w-[200px] lg:mt-8 mb-2">
       <input
         className= {usernameBorderColor ? validInputClass : invalidInputClass}
-        type="username"
-        name=""
-        id=""
+        type="text"
+        name="username"
         placeholder=" "
-        //className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-orange-500 focus:bg-white focus:outline-none"
         autoFocus
         autoComplete="true"
         value={user}
@@ -107,7 +101,7 @@ const invalidLabelClass =
           passwordBorderColor ? validInputClass : invalidInputClass
         }
         type="password"
-        name=""
+        name="password"
         id=""
         placeholder=" "
         minLength="6"

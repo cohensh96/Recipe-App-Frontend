@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useImage from '../hooks/useImage';
 import useAxios from '../hooks/useAxios';
 import axios from "../api/axios";

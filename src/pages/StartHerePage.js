@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 
 const StartHerePage = () => {
 
@@ -8,8 +7,7 @@ const StartHerePage = () => {
         <div className="flex items-center justify-center">
             <div className="py-14 text-center px-5 sm:px-0">
                 <h2 className="text-3xl sm:text-5xl text-white font-extrabold tracking-tight">
-                    <span className="block"> Top 10 Cooking Tips For A Better Meal Every Time </span>
-                  
+                    <span className="block"> Top 10 Cooking Tips For A Better Meal Every Time </span> 
                 </h2>
                 <h2 className="text-gray-50 mt-5 tracking-wide text-sm sm:text-base">
                     <span className="block">Join to us for amazing cooking experience.</span>
@@ -46,17 +44,17 @@ const StartHerePage = () => {
             <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
             1.Understanding the Science Behind the Cooking Method
             </h3>
-            <p className="text-gray-600 mb-8 font-bold">
+            <div className="text-gray-600 mb-8 font-bold">
             When developing a recipe, consider the end taste and texture you want to achieve. Knowing this, you can then figure out which essential cooking methods to use.
              You’ll see these reflected in my recipe instructions.
-             <h6>In general, cooking methods fall into three categories:</h6>
+             <b>In general, cooking methods fall into three categories:</b>
              <ul>
-              <il>Dry-heat (use fat to cook, or hot air)</il>
-              <il>Moist-heat (use water or steam)</il>
-              <il>Combination of both</il>
+              <li>Dry-heat - use fat to cook, or hot air</li>
+              <li>Moist-heat - use water or steam</li>
+              <li>Combination of both</li>
              </ul>
              When we want a crispy golden crust on halibut, We will use a dry heat pan-searing technique. To quickly cook broccoliand vegetables without losing too much of their nutrients, We will steam them with moist heat. For a fall-off, the bone short rib, sear it in a hot pan with fat, then braise it in a flavorful liquid.
-            </p>
+            </div>
           </div>
           <div className="w-full sm:w-1/2 p-6">
             <img src="/images/science-cooking.jpeg" className="w-full sm:h-80 mx-auto" viewBox="0 0 1177 598.5" >
@@ -98,7 +96,6 @@ Density also comes into play with various foods, especially with different types
   </img>
 </div>
 </div>
-
 
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">

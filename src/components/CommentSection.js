@@ -18,7 +18,6 @@ const CommentSection = ({setIsCommented}) => {
   };
 
   const handleCommentChange = (event) => {
-    console.log(commentText);
     setComment(event.target.value);
   };
 
@@ -50,7 +49,7 @@ const CommentSection = ({setIsCommented}) => {
     } 
     catch(error)
     {
-        console.log(error);
+  
         toast.error(`${error.response.data.message}`, {
           position: "top-right",
           autoClose: 5000,

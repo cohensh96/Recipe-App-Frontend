@@ -14,10 +14,8 @@ const RatingSection = ({comments}) => {
         let avarge = 0;
         comments.forEach(comment => {
             avarge += comment.rating;
-            console.log(comment.rating);
         })
         setAvarage(avarge / comments.length);
-        console.log(avarage);
     }
 
   return (

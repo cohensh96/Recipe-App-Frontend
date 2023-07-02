@@ -107,13 +107,15 @@ const EditRecipe = () => {
           data.message === "You have no permissions to edit the recipe"
         ) {
           setError("You have no permissions to edit the recipe");
+        }else if( data.message ===  "Recipe callorias must be number!"){
+          setError("Recipe callorias must be number!"); 
         }else {
           console.log(error.message);
-          setError("An error occurred."); 
+          setError("An error occurred, Please try again later."); 
         }
       } else {
         console.log(error.message);
-        setError("An error occurred.");
+        setError("An error occurred, Please try again later.");
       }
     }
 };
@@ -341,7 +343,7 @@ const EditRecipe = () => {
   Update
 </button>
 {errorMsg && (
-            <p className="text-red-500 text-sm">{errorMsg}</p>
+            <p className="text-red-500 mt-2 font-bold text-sm">{errorMsg}</p>
           )}
 
         </form>

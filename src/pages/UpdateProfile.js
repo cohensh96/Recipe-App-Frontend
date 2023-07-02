@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import axios from "../api/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../hooks/useAuth";
-import { FaUserEdit } from "react-icons/fa";
 const UpdateProfile = () => {
   const { id } = useParams();
   const axiosPrivate = useAxiosPrivate();
@@ -33,7 +31,7 @@ const UpdateProfile = () => {
     const fetchUser = async () => {
       try {
         const response = await axiosPrivate.get(`user/${id}`);
-        console.log(response);
+  
         setUserData({
           id: response.data._id,
           username: response.data.username,
@@ -45,7 +43,7 @@ const UpdateProfile = () => {
         });
       } catch (error) {
         setErrorData(error);
-        console.log(error);
+     
       } finally {
         setLoading(false);
       }
@@ -69,7 +67,6 @@ const UpdateProfile = () => {
     event.preventDefault();
     try {
       const toast_id = toast.loading("Please wait...");
-      console.log(userData);
       await axiosPrivate.put(`user`, userData);
       toast.update(toast_id, {
         render: `Your profile updated successfully!`,
@@ -86,11 +83,8 @@ const UpdateProfile = () => {
       });
       navigate(`/profile`);
     } catch (error) {
-      console.error(error);
       if (error.response) {
         const { status, data } = error.response;
-        console.log(status);
-        console.log(data.message);
         setError(data.message);
          if (
            data.message === "Missing few fields in user data."
@@ -99,7 +93,6 @@ const UpdateProfile = () => {
          }else if(data.message=== "Some fields does not meet the requrements."){
             setError("The password and the confirm must be match."); 
          }else {
-          console.log(error.message);
           setError("An error occurred.");
          }
       } else {

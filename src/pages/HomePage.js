@@ -130,7 +130,7 @@ const HomePage = () => {
               {categories.map((category, index) => (
                 <li
                   className="block w-20 md:w-24 flex-grow flex-shrink-0 text-center"
-                  key={category}
+                  key={index}
                 >
                   <NavLink to={`category/${categories[index].catagory}`}>
                     <img

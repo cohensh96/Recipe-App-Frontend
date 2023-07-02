@@ -61,7 +61,7 @@ const RecipePage = () => {
         },
       });
 
-      console.log(response);
+   
       toast.update(toast_id, {
         render: `Your comment has been update.`,
         position: "top-right",
@@ -78,7 +78,7 @@ const RecipePage = () => {
       await refetch();
       setIsEdit(false);
     } catch (error) {
-      console.log(error);
+   
       setErrorMsg(data.message);
     }
   };
@@ -89,7 +89,7 @@ const RecipePage = () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      console.log(response);
+     
       toast.update(toast_id, {
         render: `Your comment has been deleted.`,
         position: "top-right",

@@ -28,7 +28,7 @@ const AdminLayout = () => {
             <NavLink to={'recipe'} className={({ isActive, isPending }) => 
             isPending ? "pending" : 
             isActive ? "relative block border-e border-s border-t border-gray-200 bg-white p-4 text-sm font-medium" : 
-            "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"} match={true}>
+            "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"} match="true">
                  {({ isActive, isPending }) => (
                     <span className={isActive ? "absolute inset-x-0 -bottom-px h-px w-full bg-white" : ""}></span>
                 )}
@@ -40,7 +40,7 @@ const AdminLayout = () => {
             <NavLink to={'comments'} className={({ isActive, isPending }) => 
             isPending ? "pending" : 
             isActive ? "relative block border-e border-s border-t border-gray-200 bg-white p-4 text-sm font-medium" : 
-            "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"} match={true}>
+            "block bg-gray-100 p-4 text-sm font-medium text-gray-500 ring-1 ring-inset ring-white"} match="true">
               {({ isActive, isPending }) => (
                     <span className={isActive ? "absolute inset-x-0 -bottom-px h-px w-full bg-white" : ""}></span>
                 )}
