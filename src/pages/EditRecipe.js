@@ -255,6 +255,7 @@ const EditRecipe = () => {
                   {recipeEdit.recipeIngredients &&
                     recipeEdit.recipeIngredients.map((singleIng, index) => (
                       <button
+                        type="button"
                         className="bg-amber-300 transition-colors duration-150hover:bg-orange-500 text-white py-2 px-4 rounded inline-flex items-center m-1"
                         key={index}
                         onClick={() => handleIngredientDelete(singleIng)}
