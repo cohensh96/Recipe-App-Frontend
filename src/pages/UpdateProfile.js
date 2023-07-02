@@ -92,24 +92,27 @@ const UpdateProfile = () => {
       navigate(`/profile`);
     } catch (error) {
        // Set error messages based on the response data
+       let errorMessage = '';
       if (error.response) {
         const { data } = error.response;
         setError(data.message);
-         if (
-           data.message === "Missing few fields in user data."
-        ) {
+         if (data.message === "Missing few fields in user data.") {
+            errorMessage = "Missing few fields in user data.";
            setError("Missing few fields in user data.");
          }else if(data.message=== "Some fields does not meet the requrements."){
+            errorMessage = "The password and the confirm must be match.";
             setError("The password and the confirm must be match."); 
          }else {
+          errorMessage = "An error occurred.";
           setError("An error occurred.");
          }
       } else {
+        errorMessage = "An error occurred.";
         console.log(error.message);
         setError("An error occurred.");
       }
         toast.update(toast_id.current, {
-          render: `${errorMsg}`,
+          render: `${errorMessage}`,
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -118,7 +121,7 @@ const UpdateProfile = () => {
           draggable: true,
           progress: undefined,
           theme: "colored",
-          type: "success",
+          type: "error",
           isLoading: false,
         });
     }

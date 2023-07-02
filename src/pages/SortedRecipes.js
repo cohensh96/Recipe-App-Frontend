@@ -70,7 +70,7 @@ const SortedRecipes = () => {
             {recipes.length===0 &&  <div className=" items-center ">   
                  <img
                  className=" w-400 h-500 rounded"
-                 src="../images/search-no-Result.jpg"
+                 src="../images/search-no-result.jpg"
                  alt="Picutre of Recipe"
                ></img>
                   <h3 className="text-center flex justify-center text-2xl mb-8 font-bold">
