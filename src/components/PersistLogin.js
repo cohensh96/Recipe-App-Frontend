@@ -43,12 +43,6 @@ const PersistLogin = () => {
             return `${auth.accessToken ? "Information updated" : "Welcome to the Website"}`;
           },
           icon: "🟢",
-        },
-        error: {
-            render() {
-                return `Welcome to the Website`;
-            },
-            icon: false,
         }
       });
     } else {
