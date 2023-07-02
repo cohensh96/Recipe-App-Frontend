@@ -8,7 +8,15 @@ import { FaPlusCircle, FaTrash,FaUserEdit } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+/**
+ * Component for editing a recipe.
+ *
+ * This component allows users to edit their existing recipes by providing
+ * details such as recipe name, description, calories per serving, cooking time,
+ * difficulty level, ingredients, and category.
+ * Users can add and remove ingredients and categories dynamically.
+ * Once the recipe is edited, the component navigates back to the recipe page.
+ */
 const EditRecipe = () => {
   const {id} = useParams();
   const navigate = useNavigate();

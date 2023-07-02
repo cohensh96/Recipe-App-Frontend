@@ -6,6 +6,15 @@ import axios from "../api/axios";
 import useImage from "../hooks/useImage";
 import OurCommunity from "../components/OurCommunity";
 import {LuChefHat} from 'react-icons/lu'
+/**
+ * Component for the home page.
+ *
+ * This component displays the top rated recipes, recipes by category, and a search form.
+ * It also provides a brief introduction to the website and a link to learn more.
+ *
+ * Returns:
+ *   The home page component.
+ */
 const HomePage = () => {
   const getImage = useImage;
   const categories = [

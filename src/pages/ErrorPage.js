@@ -1,5 +1,13 @@
 import { NavLink } from "react-router-dom"
-
+/**
+ * Component for displaying an error page.
+ *
+ * This component is used to display a 404 error page when a requested page is not found.
+ * It provides a message and a link to the home page for users to navigate back.
+ *
+ * Returns:
+ *   The error page component.
+ */
 export default function ErrorPage() {
   return (
     

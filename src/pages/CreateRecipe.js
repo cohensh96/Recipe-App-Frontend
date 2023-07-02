@@ -6,6 +6,32 @@ import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+/***
+ * Component for creating a recipe.
+
+  This component allows users to create their own recipes by providing
+  details such as recipe name, description, calories per serving, cooking time,
+  difficulty level, ingredients, and category.
+  Users can add and remove ingredients and categories dynamically.
+  Once the recipe is created, the component navigates to the newly created recipe page.
+
+  Functions:
+
+      handleSubmit: Handles the form submission by sending a POST request to create a new recipe. Navigates to the created recipe page upon success.
+      handleDeleteCategory: Removes the specified category from the recipeCategories state.
+      handleDelete: Removes the specified ingredient from the recipeIngredients state.
+      handleCategoryAdd: Adds a new category to the recipeCategories state.
+      handleAdd: Adds a new ingredient to the recipeIngredients state.
+
+  Props:
+
+      None
+
+  Returns:
+
+      The create recipe component.
+ */
 const CreateRecipe = () => {
   // Custom hooks
   const navigate = useNavigate();

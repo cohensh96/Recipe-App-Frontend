@@ -10,7 +10,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import {FaUserEdit } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import useLogout from '../hooks/useLogout';
-
+/**
+ * Reducer function for managing state updates based on dispatched actions.
+ *
+ * @param {Object} state - The current state object.
+ * @param {Object} action - The action object dispatched to update the state.
+ * @returns {Object} - The updated state object.
+ */
 function reducer(state, action) {
   switch (action.type) {
     case "QUEUE_FOR_REMOVAL":
@@ -39,7 +45,15 @@ function reducer(state, action) {
       return state;
   }
 }
-
+/**
+ * Profile Component
+ *
+ * This component displays the user's profile information, including personal details,
+ * average rating, last comments, and a list of their recipes. It also provides functionality
+ * to update the profile, create a new recipe, and perform administrative actions.
+ *
+ * @returns {JSX.Element} - The rendered Profile component.
+ */
 const Profile = () => {
   const toast_id = useRef(null);
   const axiosPrivate = useAxiosPrivate();
