@@ -288,6 +288,7 @@ const CreateRecipe = () => {
                     placeholder="Enter Recipe Ingredient"
                     value={ingredient}
                     onChange={(e) => setIngredient(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex justify-center items-center">
@@ -331,6 +332,7 @@ const CreateRecipe = () => {
                     placeholder="Enter Recipe Catgory"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex justify-center items-center">
@@ -360,7 +362,7 @@ const CreateRecipe = () => {
               </section>
 
               <label htmlFor="uploadImage">Upload Image</label>
-              <input type="file" name="uploadedImage" id="file"/>
+              <input type="file" name="uploadedImage" id="file" required/>
 
               <button
                 type="submit"
