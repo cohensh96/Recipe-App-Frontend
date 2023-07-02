@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
  * It fetches the user data from the server and allows the user to update their profile.
  */
 const UpdateProfile = () => {
+  const toast_id = useRef(null);
   // Custom hook for making private Axios requests
   const axiosPrivate = useAxiosPrivate();
   // React Router hook for navigation
@@ -70,11 +71,11 @@ const UpdateProfile = () => {
     event.preventDefault();
     try {
       // Show a loading toast message
-      const toast_id = toast.loading("Please wait...");
+      toast_id.current = toast.loading("Please wait...");
        // Send a PUT request to update the user profile
       await axiosPrivate.put(`user`, userData);
        // Update the toast message to indicate success
-      toast.update(toast_id, {
+      toast.update(toast_id.current, {
         render: `Your profile updated successfully!`,
         position: "top-right",
         autoClose: 5000,
@@ -107,6 +108,19 @@ const UpdateProfile = () => {
         console.log(error.message);
         setError("An error occurred.");
       }
+        toast.update(toast_id.current, {
+          render: `${errorMsg}`,
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          type: "success",
+          isLoading: false,
+        });
     }
   };
 
