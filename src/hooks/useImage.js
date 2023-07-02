@@ -1,5 +1,5 @@
-// const BASE_URL = "https://recipes-for-everyone-backend.onrender.com/";
- const BASE_URL = "http://localhost:3500";
+const BASE_URL = "https://recipes-for-everyone-backend.onrender.com/";
+//  const BASE_URL = "http://localhost:3500";
 
 /**
  * Custom hook for converting an image string to a full URL.
