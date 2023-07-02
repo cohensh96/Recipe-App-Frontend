@@ -158,7 +158,7 @@ const RecipesPage = () => {
             <hr className="border-gray-300" />
             <div className="flex flex-1 items-center justify-center flex-wrap px-4 py-1 text-center mx-auto">
               {(recipe.recipeCategorys).map((category, index) => 
-                  <span className="px-2 py-1 m-1 text-xs rounded-full dark:bg-orange-400" key={index}>{category}</span>
+                  <span className="px-2 py-1 m-1 text-xs rounded-full bg-orange-400" key={index}>{category}</span>
               )}
             </div>
           </div>

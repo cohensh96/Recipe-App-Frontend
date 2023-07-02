@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // The base URL for the API
-const BASE_URL = "https://recipes-for-everyone-backend.onrender.com";
+// const BASE_URL = "https://recipes-for-everyone-backend.onrender.com";
 // You can also use a local URL for development purposes
-// const BASE_URL = 'http://localhost:3500';
+const BASE_URL = 'http://localhost:3500';
 
 /**
  * Creates an instance of axios with the base URL.

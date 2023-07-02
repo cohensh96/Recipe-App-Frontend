@@ -170,7 +170,7 @@ const RecipePage = () => {
             <div>
               <h3 className="mt-5 font-bold">Ingredients:</h3>
               <ul
-                className="flex flex-col list-inside hover:list-inside
+                className="flex flex-col hover:list-inside
               list-disc list-inside text-slate-700 bg-white ring-1 ring-slate-900/5 p-4 pl-8 "
               >
                 {data &&
