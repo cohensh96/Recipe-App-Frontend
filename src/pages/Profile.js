@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useRef, useReducer, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useAxios from '../hooks/useAxios';
@@ -41,6 +41,7 @@ function reducer(state, action) {
 }
 
 const Profile = () => {
+  const toast_id = useRef(null);
   const axiosPrivate = useAxiosPrivate();
   const {auth} = useAuth();
   const location = useLocation();
@@ -111,7 +112,7 @@ const Profile = () => {
         id,
         type: "QUEUE_FOR_REMOVAL"
       });
-      const toast_id = toast.loading("Pending request ...")
+      toast_id.current = toast.loading("Pending request ...")
       
       const response = await axiosPrivate.delete(`recipe`,
       {
@@ -121,7 +122,8 @@ const Profile = () => {
         },
         withCredentials: true,
       });
-      toast.update(toast_id, 
+      console.log(response);
+      toast.update(toast_id.current, 
       { render: `${response.data.recipeName} has been deleted.`,
       position: "top-right",
       autoClose: 5000,
@@ -132,7 +134,7 @@ const Profile = () => {
       progress: undefined,
       theme: "colored", type: "error", isLoading: false });
       dispatch({ type: "CLEAN_COLLECTION" })
-        refetchAvarage();
+      refetchAvarage();
     } catch (error) {
       console.log(error.message);      
     }
@@ -149,6 +151,7 @@ const Profile = () => {
   }
   return (
     <section className='font-display'>
+      <ToastContainer closeOnClick={false} closeButton={false} />
       <article className='flex flex-col  mx-auto pt-10 lg:grid lg:place-content-start lg:grid-cols-2 lg:gap-5'>
         {/* Profile + Icon */}
         <article className='flex text-5xl text-orange-500 lg:col-span-2 lg:place-content-center lg:mb-2'>
@@ -285,7 +288,6 @@ const Profile = () => {
                             Delete
                         </button>
                 </article>
-                <ToastContainer closeOnClick={false} closeButton={false} />
               </article>
             )))
           }
